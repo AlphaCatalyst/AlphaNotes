@@ -1,0 +1,12 @@
+title: AlphaNotes
+description: 可核实的市场研究笔记 · AlphaCatalyst
+theme: jekyll-theme-cayman
+
+# 项目页（非 org 主页）必须指定 baseurl，否则主题 CSS 会 404。
+# 如果日后重命名仓库，这一行要同步改。
+url: https://alphacatalyst.github.io
+baseurl: /AlphaNotes
+
+exclude:
+  - .DS_Store
+  - README-dev.md

@@ -1,0 +1,42 @@
+---
+# 这段空 front matter 是必需的，Jekyll 靠它识别要编译的 scss
+---
+
+@import "{{ site.theme }}";
+
+/* 研究报告里有 10 列宽表，Cayman 默认正文栏太窄，放宽并允许表格横向滚动 */
+.main-content {
+  max-width: 1120px;
+
+  table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    font-size: 13.5px;
+  }
+
+  th,
+  td {
+    padding: 6px 10px;
+  }
+
+  h2 {
+    margin-top: 2.2rem;
+  }
+
+  /* 报告里大量使用引用块标注数据来源，弱化一点避免喧宾夺主 */
+  blockquote {
+    font-size: 0.95rem;
+  }
+}
+
+@media screen and (min-width: 64em) {
+  .main-content {
+    max-width: 1120px;
+    padding: 2rem 3rem;
+  }
+
+  .page-header {
+    padding: 3rem 4rem;
+  }
+}

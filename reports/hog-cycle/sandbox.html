@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>猪周期估值沙盘 · 牧原股份 002714</title>
+<style>
+  :root {
+    --bg: #ffffff; --fg: #17181a; --muted: #6b7280; --faint: #9ca3af;
+    --border: #e5e7eb; --card: #fafafa; --hair: #eceef1;
+    --accent: #2563eb; --danger: #dc2626; --success: #16a34a; --warning: #d97706;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0d0e10; --fg: #e6e8ea; --muted: #9ba1a8; --faint: #6b7280;
+      --border: #26282c; --card: #151719; --hair: #1f2124;
+      --accent: #60a5fa; --danger: #f87171; --success: #4ade80; --warning: #fbbf24;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 32px 24px 64px; background: var(--bg); color: var(--fg);
+    font: 15px/1.7 -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+          "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  main { max-width: 1080px; margin: 0 auto; }
+  h1 { font-size: 26px; margin: 0 0 6px; letter-spacing: -0.01em; }
+  h2 { font-size: 19px; margin: 40px 0 10px; letter-spacing: -0.01em; }
+  h3 { font-size: 15px; margin: 0 0 8px; font-weight: 600; }
+  p  { margin: 0 0 10px; }
+  a  { color: var(--accent); }
+  .sub   { color: var(--muted); font-size: 14px; }
+  .note  { color: var(--faint); font-size: 12.5px; line-height: 1.6; margin-top: 6px; }
+  .em    { font-weight: 600; }
+  .card  { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 16px; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+  .row   { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  @media (max-width: 860px) { .grid2 { grid-template-columns: 1fr; } .sandbox { grid-template-columns: 1fr !important; } }
+
+  /* 统计块 */
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .stat  { padding: 2px 0; }
+  .stat .v { font-size: 22px; font-weight: 600; letter-spacing: -0.02em; }
+  .stat .l { font-size: 12px; color: var(--muted); margin-top: 2px; line-height: 1.45; }
+  .t-danger  { color: var(--danger); }
+  .t-success { color: var(--success); }
+  .t-warning { color: var(--warning); }
+  .t-accent  { color: var(--accent); }
+
+  /* 控件 */
+  .pill {
+    font: inherit; font-size: 13px; padding: 4px 12px; border-radius: 999px; cursor: pointer;
+    border: 1px solid var(--border); background: transparent; color: var(--fg);
+  }
+  .pill:hover { border-color: var(--accent); }
+  .pill.on { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .btn {
+    font: inherit; font-size: 13px; padding: 4px 12px; border-radius: 6px; cursor: pointer;
+    border: 1px solid var(--border); background: transparent; color: var(--fg);
+  }
+  .btn:hover { border-color: var(--accent); color: var(--accent); }
+  .slider { margin-bottom: 14px; }
+  .slider .top { display: flex; justify-content: space-between; align-items: baseline; font-size: 13px; }
+  .slider .top .name { color: var(--muted); }
+  .slider .top .val  { font-weight: 600; }
+  .slider input[type=range] { width: 100%; accent-color: var(--accent); margin: 3px 0 0; cursor: pointer; }
+  .slider .hint { font-size: 11.5px; color: var(--faint); }
+
+  /* 表格 */
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  th, td { padding: 7px 10px; text-align: left; border-bottom: 1px solid var(--hair); }
+  th { font-weight: 600; color: var(--muted); font-size: 12.5px; white-space: nowrap; }
+  td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; }
+  tbody tr:last-child td { border-bottom: none; }
+  .framed { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+  .framed table { display: block; overflow-x: auto; white-space: nowrap; }
+  tr.hl td { background: color-mix(in srgb, var(--accent) 7%, transparent); }
+
+  /* 提示条 */
+  .callout { border-left: 3px solid var(--border); padding: 10px 14px; margin: 12px 0; background: var(--card); border-radius: 0 6px 6px 0; font-size: 13.5px; }
+  .callout .h { font-weight: 600; margin-bottom: 3px; }
+  .c-danger  { border-left-color: var(--danger); }
+  .c-warning { border-left-color: var(--warning); }
+  .c-accent  { border-left-color: var(--accent); }
+
+  svg { display: block; width: 100%; height: auto; }
+  .chart-wrap { border: 1px solid var(--border); border-radius: 8px; padding: 8px 4px 4px; }
+  hr { border: none; border-top: 1px solid var(--hair); margin: 40px 0 20px; }
+</style>
+</head>
+<body>
+<main>
+
+<h1>猪周期估值沙盘</h1>
+<p class="sub">
+  对《起点.md》牧原/东瑞估值推演的参数化重估。牧原股份 002714.SZ，价格基准 2026-09-14 收盘
+  42.59 元、总市值 2458.72 亿、总股本 57.73 亿股。完整论证见
+  <a href="https://github.com/AlphaCatalyst/AlphaNotes/blob/main/reports/hog-cycle/analysis.md">辩证复核</a>。
+</p>
+
+<!-- ============ 反向估值 ============ -->
+<h2>当前股价隐含的 2027 年猪价</h2>
+<div class="card">
+  <div class="stats" style="grid-template-columns: repeat(5, 1fr);">
+    <div class="stat"><div class="v t-accent" id="implied">—</div><div class="l" id="impliedLabel">当前市值反解</div></div>
+    <div class="stat"><div class="v">14.0</div><div class="l">广发证券 2027E（元/kg）</div></div>
+    <div class="stat"><div class="v">14.5</div><div class="l">瑞银 2027E（元/kg）</div></div>
+    <div class="stat"><div class="v">13.41</div><div class="l">期货 LH2707（2027/07）</div></div>
+    <div class="stat"><div class="v t-warning">18.0</div><div class="l">原文档假设（元/kg）</div></div>
+  </div>
+  <p class="note" style="margin-top:14px; border-top:1px solid var(--hair); padding-top:12px;">
+    市场定价、卖方共识、期货曲线三者一致指向 14 元左右。原文档的 18 元要成立，需要比这个共识高 26%–34%。
+    反解公式：市值 ÷ PE ÷ 0.925 ÷ 出栏量 ÷ 均重 + 完全成本。
+    <br><span class="em">左侧首格随下方滑杆联动</span>——它反解的是"在你设定的成本／出栏／PE 下，当前股价对应多高的猪价"。
+    按基准口径（成本 11.5、出栏 7800 万头、PE 10）为 <span class="em">14.34 元/kg</span>，也就是下方猪价图里那条绿色参考线。
+  </p>
+</div>
+
+<!-- ============ 沙盘 ============ -->
+<h2>参数沙盘</h2>
+<div class="row" style="margin-bottom:12px;">
+  <span id="presets" class="row" style="gap:8px;"></span>
+  <span style="flex:1"></span>
+  <button class="btn" id="resetNow">重置到现状</button>
+  <button class="btn" id="resetDoc">回到原文档</button>
+</div>
+
+<div class="sandbox" style="display:grid; grid-template-columns: minmax(0,320px) 1fr; gap:24px; align-items:start;">
+  <div class="card" id="controls"></div>
+  <div>
+    <div class="stats" id="outputs"></div>
+    <div id="pbNote"></div>
+    <div class="card" style="margin-top:14px;">
+      <h3>计算链路</h3>
+      <div id="chain" class="note" style="font-size:13px; line-height:1.9;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 情景对照 ============ -->
+<h2>情景对照</h2>
+<p class="sub">
+  统一公式与原文档一致，仅增加 0.925 的归母折算。首行「现状」不是估值情景，而是现实锚点——按今天的猪价和成本，牧原单公斤倒挂
+  0.6 元。中性情景算出的股价与现价仅差 1.4%，当前股价几乎精确地反映了卖方一致预期。
+</p>
+<div class="framed"><table id="scenarioTable"></table></div>
+<p class="note">
+  猪价与成本单位为元/kg，均重为 kg。现状行的猪价取 2026-09-15 全国均价、成本取 8 月完全成本 11.5、出栏取指引中位数；其头均为负，故
+  PE 法失效。崔哥情景按公式得头均 811 元，其本人取整为 800 元。原文档未做 0.925 折算，其自算结果为 7200 亿市值、约 120 元股价。
+</p>
+
+<!-- ============ 图表 ============ -->
+<h2>四张图看清参数的位置</h2>
+<div class="grid2">
+  <div>
+    <h3>全国生猪年均价与两条假设线</h3>
+    <div class="chart-wrap"><div id="c1"></div></div>
+    <p class="note">
+      纵轴：全国生猪年度均价（元/kg）；横轴：年份。2026 年为上半年瘦肉型均价。来源：民生证券／卓创资讯，2018–2026H1。
+      18 元处于 2007–2025 年年均价的约第 74 百分位，是偏上而非中枢。
+    </p>
+  </div>
+  <div>
+    <h3>生猪期货远月曲线</h3>
+    <div class="chart-wrap"><div id="c2"></div></div>
+    <p class="note">
+      纵轴：合约收盘价（元/kg）；横轴：大商所生猪合约（交割月 2026/11 至 2027/07）。来源：大连商品交易所，2026-09-15 收盘。
+      LH2707 为当前最远挂牌合约，持仓仅 3.12 万手，流动性弱于主力。
+    </p>
+  </div>
+  <div>
+    <h3>牧原完全成本：它是周期变量，不是常数</h3>
+    <div class="chart-wrap"><div id="c3"></div></div>
+    <p class="note">
+      纵轴：完全成本（元/kg，含三费与折旧摊销）；横轴：时点。上一轮上行周期中成本从 12.0 涨至 16.0，<span class="em">+33%</span>。
+      来源：公司年报与投资者关系活动记录表；2019 年与 2021 年分季数值为券商测算。
+    </p>
+  </div>
+  <div>
+    <h3>全国能繁母猪存栏与调控基准</h3>
+    <div class="chart-wrap"><div id="c4"></div></div>
+    <p class="note">
+      纵轴：全国能繁母猪存栏（万头）；横轴：季末时点。来源：国家统计局／农业农村部，2023 年末至 2026Q2。
+      正常保有量基准三次下调：4100（2021）→ 3900（2024.2）→ 3750（2026.5）。华鑫证券：累计去化超 10%（约降至 3565 万头）才触发趋势性上涨。
+    </p>
+  </div>
+</div>
+
+<!-- ============ 历史校准 ============ -->
+<h2>历史校准：同样的猪价，牧原实际赚了多少</h2>
+<div class="callout c-warning">
+  <div class="h">参数时点错配</div>
+  原文档把周期底部的极限成本（12 元）和周期上行期的猪价（18 元）拼进同一张表。2022 年全国年均猪价 18.7 元，高于原文档假设，
+  而牧原当年头均归母只有 217 元，不是 720 元——差额全部来自成本。
+</div>
+<div class="framed"><table id="histTable"></table></div>
+<p class="note">
+  猪价与成本单位为元/kg。2019–2024 年头均按生猪合计销量计算，2025 年起公司改变披露口径，按商品猪计算。来源：牧原历年年报、销售简报。
+</p>
+
+<div class="grid2" style="margin-top:20px;">
+  <div>
+    <h3>要让头均达到 720 元，需要多高的猪价</h3>
+    <div class="framed"><table id="reqTable"></table></div>
+  </div>
+  <div>
+    <h3>联合概率：为什么「逐项保守」不等于结果保守</h3>
+    <div class="framed"><table id="probTable"></table></div>
+    <p class="note">
+      概率为本报告的主观赋值，仅用于说明联合概率的衰减结构。即便给每个参数 70% 的宽松把握且假设独立，联合概率也只有 0.7⁴ = 24%。
+    </p>
+  </div>
+</div>
+
+<!-- ============ 成本反驳 ============ -->
+<h2>成本会不会重演上一轮的 +33%</h2>
+<div class="callout c-accent">
+  <div class="h">原推演者的反驳</div>
+  「上一轮 12 涨上去，这一轮是从 11 涨上去，成本的上涨是来自于外购仔猪。」
+  隐含论证：牧原自繁自养不外购仔猪，所以那个驱动这一轮不存在，12 元仍是保守的。
+</div>
+<p class="sub">
+  这条反驳精准命中了四个驱动中的第二项，但漏掉了饲料。牧原当年的机制其实也不是「外购仔猪育肥」，
+  而是非瘟后优质二元种猪紧缺、被迫用三元母猪回交，PSY 从约 24 掉到 20。
+</p>
+<div class="framed"><table id="driverTable"></table></div>
+
+<div class="grid2" style="margin-top:20px;">
+  <div>
+    <h3>三种情形下的上行期成本</h3>
+    <div class="framed"><table id="costCaseTable"></table></div>
+    <p class="note">
+      三种情形都落在 12.8–14.2 元，均高于原文档假设的 12 元。要让成本 ≤ 12，反弹幅度须 ≤ 0.5 元/kg，
+      即上一轮的 12.5%——而光饲料一项历史实测就有 1.3 元/kg。
+    </p>
+  </div>
+  <div>
+    <h3>玉米现货价：当前仍低于上一轮高点</h3>
+    <div class="chart-wrap"><div id="c5"></div></div>
+    <p class="note">
+      纵轴：玉米现货价（元/吨）；横轴：时点。当前 2372 元/吨比 2021 年高点 2875 低 17.5%。来源：国家发改委、卓创资讯、券商研报。
+      神农 2026 年 11.5 元成本目标的官方描述即「锚定为锁价 2025 年饲料原料成本」——低成本以饲料低价为前提。
+    </p>
+  </div>
+</div>
+<div class="callout c-warning">
+  <div class="h">这条反驳是双刃的</div>
+  第四项驱动「新建产能爬坡」之所以可以不重演，前提是牧原不搞大规模新建。但同一个模型又假设出栏从 7800 万涨到 1 亿头（+28%），
+  这必然需要新建与爬坡期。「因为不扩产所以成本不涨」与「出栏涨到 1 亿头」不能同时成立。
+</div>
+
+<!-- ============ 敏感度 ============ -->
+<h2>三个参数的估值敏感度排序</h2>
+<p class="sub">
+  从原文档基准（猪价 18、成本 12、出栏 1 亿头、均重 120、PE 10、股价 115.36 元）出发，每次只改动一个变量。
+  按幅度排序，猪价影响最大，成本最小——成本的特殊性不在幅度，而在于它是唯一没被任何一方审视过的参数，且与猪价负相关。
+</p>
+<div class="framed"><table id="sensTable"></table></div>
+
+<!-- ============ 横向 ============ -->
+<h2>牧原 / 神农 / 东瑞横向对比</h2>
+<p class="sub">
+  头均市值的数学本质是（猪价 − 完全成本）× 出栏体重 × PE，第一解释变量是成本，不是估值偏好。
+  神农与东瑞 1.8 元/kg 的成本差，乘 120kg 再乘 10 倍 PE，就是 2160 元的头均市值差——已解释两者实际差额 2948 元的 73%。
+</p>
+<div class="framed"><table id="peerTable"></table></div>
+<p class="note">
+  市值基准：牧原、东瑞为 2026-09-14，神农为 2026-09-11。崔哥原测算用目标出栏作分母，得东瑞 1650 元、神农 5428 元、倍数 3.3；
+  改用年化实际出栏后，倍数实为 2.42。盈亏平衡猪价按「售价 = 完全成本」反解，东瑞已扣除其 0.80 元/kg 的地域加供港溢价，
+  牧原与神农假设售价约等于全国均价。
+</p>
+
+<!-- ============ 跟踪 ============ -->
+<h2>可证伪的跟踪指标</h2>
+<div class="framed"><table id="trackTable"></table></div>
+<div class="callout c-danger">
+  <div class="h">最容易证伪原文档的单一指标</div>
+  牧原完全成本。如果 2027 年猪价回到 16 元以上而牧原成本同时升破 13 元，那么「头均 720 元」就不可能实现，无论出栏量是多少。
+</div>
+
+<hr>
+<p class="note">
+  数据截至 2026-09-16。公司公告与交易所数据为一手来源；月度完全成本为管理层口头表述，存在 ±0.1–0.2 元/kg 模糊度；
+  价格柔性推演、成本驱动拆解、情景矩阵数值与头均市值重算为本报告测算。完整来源与可信度分级见
+  <a href="https://github.com/AlphaCatalyst/AlphaNotes/blob/main/reports/hog-cycle/analysis.md">辩证复核</a> 附录 A。本页面不构成投资建议。
+</p>
+
+</main>
+
+<script>
+/* ===================== 常量 ===================== */
+const SHARES = 57.73, CUR_PRICE = 42.59, CUR_CAP = 2458.72;
+const PEAK_CAP = 4770.6, NET_ASSET = 801.87, ANNUALIZED_VOL = 7846, CONV = 0.925;
+
+const SCENARIOS = [
+  { id:'now',  name:'现状',   price:10.9,  cost:11.5, volume:7800,  weight:120, tone:'',
+    note:'2026-09-15 全国均价 10.81–10.91、8 月完全成本 11.5、指引中位数 7800 万头。单公斤倒挂 0.6 元，PE 估值法在此失效' },
+  { id:'doc',  name:'原文档', price:18.0,  cost:12.0, volume:10000, weight:120, tone:'warning',
+    note:'猪价用历史均值+周期位置，出栏按生物资产扩产推，自称三项均保守' },
+  { id:'cui',  name:'崔哥',   price:17.49, cost:11.0, volume:7800,  weight:125, tone:'warning',
+    note:'由头均 800 元反推猪价 17.49；崔哥本人把 811 元取整为 800 元' },
+  { id:'bull', name:'乐观',   price:17.0,  cost:12.0, volume:8100,  weight:120, tone:'success',
+    note:'能繁去化超 10% 触发反转，猪价回到 2024 年水平，成本温和反弹 0.5 元' },
+  { id:'base', name:'中性',   price:14.0,  cost:11.2, volume:7800,  weight:120, tone:'accent',
+    note:'直接采用广发证券 2027E 参数；算出的头均 336 元与广发自身预测完全吻合' },
+  { id:'bear', name:'谨慎',   price:13.0,  cost:11.5, volume:7800,  weight:120, tone:'danger',
+    note:'政策熨平生效、去化不彻底，猪价停在广发 2028E 水平，成本维持当前' },
+].map(s => ({ ...s, pe: 10 }));
+
+const PARAM_DEFS = [
+  { key:'price',  label:'生猪均价',   min:9,    max:24,    step:0.1, unit:' 元/kg', hint:'2025 年全国 13.74｜2022 年 18.7｜2020 年 34.1' },
+  { key:'cost',   label:'完全成本',   min:10.5, max:16,    step:0.1, unit:' 元/kg', hint:'2026/8 实为 11.5｜上轮上行期峰值 16.0' },
+  { key:'volume', label:'商品猪出栏', min:6000, max:11000, step:100, unit:' 万头',  hint:'2026 年公司指引 7500–8100｜2025 年实际 7798' },
+  { key:'weight', label:'出栏均重',   min:105,  max:135,   step:1,   unit:' kg',    hint:'发改委要求控制在 120 kg 左右' },
+  { key:'pe',     label:'目标 PE',    min:5,    max:20,    step:0.5, unit:' 倍',    hint:'上轮顶部 17.4–17.8｜市场对 2027E 给 10.53' },
+];
+
+let P = { ...pick(SCENARIOS.find(s => s.id === 'doc')) };
+function pick(s) { return { price:s.price, cost:s.cost, volume:s.volume, weight:s.weight, pe:s.pe }; }
+
+/* ===================== 计算 ===================== */
+function compute(p) {
+  const headProfit = (p.price - p.cost) * p.weight;
+  const segProfit  = headProfit * p.volume / 10000;
+  const netProfit  = segProfit * CONV;
+  const targetCap  = netProfit * p.pe;
+  const targetPrice = targetCap / SHARES;
+  return { headProfit, segProfit, netProfit, targetCap, targetPrice, upside: targetPrice / CUR_PRICE - 1 };
+}
+function impliedHogPrice(p) {
+  const impliedSeg  = (CUR_CAP / p.pe) / CONV;
+  const impliedHead = impliedSeg * 10000 / p.volume;
+  return { impliedHead, impliedPrice: p.cost + impliedHead / p.weight };
+}
+const r1 = n => n.toFixed(1), r2 = n => n.toFixed(2), rd = n => Math.round(n);
+/* 保留 1 位小数，但 17.49 这类两位小数的值不四舍五入掉 */
+const rp = n => (Number.isInteger(n * 10) ? n.toFixed(1) : n.toFixed(2));
+const pct = n => (n >= 0 ? '+' : '') + (n * 100).toFixed(1) + '%';
+
+/* ===================== SVG 折线图 ===================== */
+function lineChart(opts) {
+  const { categories, series, unit = '', refLines = [], beginAtZero = false,
+          showValues = false, height = 250 } = opts;
+  const W = 660, H = height, padL = 54, padR = 74, padT = 18, padB = 36;
+  const pw = W - padL - padR, ph = H - padT - padB;
+
+  const vals = series.flatMap(s => s.data).concat(refLines.map(r => r.value));
+  let lo = beginAtZero ? 0 : Math.min(...vals), hi = Math.max(...vals);
+  const gap = (hi - lo) * 0.14 || 1;
+  if (!beginAtZero) lo -= gap;
+  hi += gap;
+
+  const X = i => padL + (categories.length === 1 ? pw / 2 : i * pw / (categories.length - 1));
+  const Y = v => padT + ph - ((v - lo) / (hi - lo)) * ph;
+
+  let s = `<svg viewBox="0 0 ${W} ${H}" role="img">`;
+  // y 轴网格与刻度
+  for (let k = 0; k <= 4; k++) {
+    const v = lo + (hi - lo) * k / 4, y = Y(v);
+    s += `<line x1="${padL}" y1="${y}" x2="${padL + pw}" y2="${y}" stroke="var(--hair)" stroke-width="1"/>`;
+    s += `<text x="${padL - 8}" y="${y + 4}" text-anchor="end" font-size="11" fill="var(--faint)">${v.toFixed(v < 100 ? 1 : 0)}</text>`;
+  }
+  // x 轴标签
+  categories.forEach((c, i) => {
+    s += `<text x="${X(i)}" y="${H - 12}" text-anchor="middle" font-size="11" fill="var(--faint)">${c}</text>`;
+  });
+  // 参考线
+  refLines.forEach(rl => {
+    const y = Y(rl.value), col = `var(--${rl.tone || 'faint'})`;
+    s += `<line x1="${padL}" y1="${y}" x2="${padL + pw}" y2="${y}" stroke="${col}" stroke-width="1.2" stroke-dasharray="4 3" opacity="0.85"/>`;
+    if (rl.label) s += `<text x="${padL + pw + 6}" y="${y + 4}" font-size="10.5" fill="${col}">${rl.label}</text>`;
+  });
+  // 数据线
+  series.forEach(se => {
+    const col = `var(--${se.tone || 'accent'})`;
+    const pts = se.data.map((v, i) => `${X(i)},${Y(v)}`).join(' ');
+    s += `<polyline points="${pts}" fill="none" stroke="${col}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>`;
+    se.data.forEach((v, i) => {
+      s += `<circle cx="${X(i)}" cy="${Y(v)}" r="3" fill="var(--bg)" stroke="${col}" stroke-width="1.8"/>`;
+      if (showValues) s += `<text x="${X(i)}" y="${Y(v) - 10}" text-anchor="middle" font-size="10.5" fill="var(--muted)">${v}</text>`;
+    });
+  });
+  s += `<text x="${padL}" y="12" font-size="10.5" fill="var(--faint)">${unit}</text>`;
+  return s + '</svg>';
+}
+
+/* ===================== 表格助手 ===================== */
+function table(headers, rows, aligns = [], hlRows = []) {
+  let h = '<thead><tr>' + headers.map((x, i) =>
+    `<th class="${aligns[i] === 'n' ? 'n' : ''}">${x}</th>`).join('') + '</tr></thead>';
+  let b = '<tbody>' + rows.map((r, ri) =>
+    `<tr class="${hlRows.includes(ri) ? 'hl' : ''}">` + r.map((c, i) =>
+      `<td class="${aligns[i] === 'n' ? 'n' : ''}">${c}</td>`).join('') + '</tr>').join('') + '</tbody>';
+  return h + b;
+}
+
+/* ===================== 渲染：控件 ===================== */
+document.getElementById('controls').innerHTML =
+  '<h3 style="margin-bottom:12px">输入假设</h3>' +
+  PARAM_DEFS.map(d => `
+    <div class="slider">
+      <div class="top"><span class="name">${d.label}</span><span class="val" id="v-${d.key}"></span></div>
+      <input type="range" id="s-${d.key}" min="${d.min}" max="${d.max}" step="${d.step}">
+      <div class="hint">${d.hint}</div>
+    </div>`).join('');
+
+PARAM_DEFS.forEach(d => {
+  document.getElementById('s-' + d.key).addEventListener('input', e => {
+    P[d.key] = Number(e.target.value);
+    render();
+  });
+});
+
+document.getElementById('presets').innerHTML = SCENARIOS.map(s =>
+  `<button class="pill" data-id="${s.id}" title="${s.note}">${s.name}</button>`).join('');
+document.querySelectorAll('#presets .pill').forEach(btn => {
+  btn.addEventListener('click', () => {
+    P = pick(SCENARIOS.find(s => s.id === btn.dataset.id));
+    render();
+  });
+});
+document.getElementById('resetNow').onclick = () => { P = pick(SCENARIOS.find(s => s.id === 'now')); render(); };
+document.getElementById('resetDoc').onclick = () => { P = pick(SCENARIOS.find(s => s.id === 'doc')); render(); };
+
+/* ===================== 渲染：动态部分 ===================== */
+function render() {
+  PARAM_DEFS.forEach(d => {
+    document.getElementById('s-' + d.key).value = P[d.key];
+    document.getElementById('v-' + d.key).textContent = P[d.key] + d.unit;
+  });
+
+  const o = compute(P), im = impliedHogPrice(P);
+  const bad = o.netProfit <= 0;
+  const tone = o.upside > 0.5 ? 't-success' : o.upside < -0.1 ? 't-danger' : 't-warning';
+
+  document.getElementById('implied').textContent = r2(im.impliedPrice) + ' 元/kg';
+  document.getElementById('impliedLabel').textContent =
+    `当前市值反解（PE ${P.pe} 倍、出栏 ${P.volume} 万头、成本 ${P.cost} 元）`;
+
+  document.getElementById('outputs').innerHTML = `
+    <div class="stat"><div class="v ${o.headProfit <= 0 ? 't-danger' : ''}">${rd(o.headProfit)} 元</div><div class="l">头均利润</div></div>
+    <div class="stat"><div class="v ${o.segProfit <= 0 ? 't-danger' : ''}">${rd(o.segProfit)} 亿</div><div class="l">养殖板块经营利润</div></div>
+    <div class="stat"><div class="v ${bad ? 't-danger' : ''}">${rd(o.netProfit)} 亿</div><div class="l">归母净利（× 0.925）</div></div>
+    ` + (bad ? `
+    <div class="stat"><div class="v t-accent">${r2(CUR_CAP / NET_ASSET)} 倍</div><div class="l">改用 PB（净资产 801.87 亿）</div></div>
+    <div class="stat"><div class="v t-accent">${rd(CUR_CAP * 10000 / ANNUALIZED_VOL)} 元</div><div class="l">改用头均市值（年化 7846 万头）</div></div>
+    <div class="stat"><div class="v t-danger">PE 法失效</div><div class="l">盈利为负，倍数无意义</div></div>` : `
+    <div class="stat"><div class="v">${rd(o.targetCap)} 亿</div><div class="l">目标市值（历史峰值 ${PEAK_CAP} 亿）</div></div>
+    <div class="stat"><div class="v ${tone}">${r2(o.targetPrice)} 元</div><div class="l">对应股价</div></div>
+    <div class="stat"><div class="v ${tone}">${pct(o.upside)}</div><div class="l">相对现价 42.59 元</div></div>`);
+
+  document.getElementById('pbNote').innerHTML = bad ? `
+    <div class="callout c-danger"><div class="h">当前参数下 PE 估值法不适用</div>
+    头均利润为负，市值 ÷ 负利润没有意义。这正是周期底部的真实状态——也是券商在亏损期改用 PB 和头均市值的原因。
+    华金证券的规则是「在亏损期，选择 PB 估值风险得到较大释放的标的」；华创证券给的行业水位是头部猪企头均市值
+    2500–3000 元、二线 1500–2000 元。把猪价滑杆推到 11.5 元以上，PE 法才重新有效。</div>` : '';
+
+  const act = SCENARIOS.find(s => PARAM_DEFS.every(d => s[d.key] === P[d.key]));
+  document.querySelectorAll('#presets .pill').forEach(b =>
+    b.classList.toggle('on', !!act && b.dataset.id === act.id));
+
+  document.getElementById('chain').innerHTML = `
+    头均利润 =（${P.price} − ${P.cost}）× ${P.weight} = <span class="em">${rd(o.headProfit)} 元</span><br>
+    板块经营利润 = ${rd(o.headProfit)} × ${P.volume} 万头 = <span class="em">${r1(o.segProfit)} 亿</span><br>
+    归母净利 = ${r1(o.segProfit)} × 0.925 = <span class="em">${r1(o.netProfit)} 亿</span>
+    　（完全成本已含三费与折旧，养殖业免所得税，仅扣少数股东权益与屠宰板块）<br>
+    目标市值 = ${r1(o.netProfit)} × ${P.pe} = <span class="em">${r1(o.targetCap)} 亿</span>
+    　→ 股价 = 市值 ÷ 57.73 亿股 = <span class="em">${r2(o.targetPrice)} 元</span>`;
+}
+
+/* ===================== 渲染：静态表格与图 ===================== */
+document.getElementById('scenarioTable').innerHTML = table(
+  ['情景','猪价','成本','出栏','均重','头均利润','归母净利','目标市值','股价','vs 现价'],
+  SCENARIOS.map(s => {
+    const r = compute(s), bad = r.netProfit <= 0;
+    return [s.name, rp(s.price), rp(s.cost), s.volume + ' 万', s.weight,
+      rd(r.headProfit) + ' 元', rd(r.netProfit) + ' 亿',
+      bad ? 'PE 法失效' : rd(r.targetCap) + ' 亿',
+      bad ? '—' : r2(r.targetPrice), bad ? '—' : pct(r.upside)];
+  }),
+  ['', 'n','n','n','n','n','n','n','n','n'], [4]);
+
+document.getElementById('histTable').innerHTML = table(
+  ['年份','全国年均猪价','牧原完全成本','商品猪出栏','归母净利','头均归母'],
+  [['2019','21.9','约 13.47','867.9 万','61.14 亿','596 元'],
+   ['2020','34.1','15+','1152.4 万','274.51 亿','1515 元'],
+   ['2021','20.3','16.0 → 14.8','3688.7 万','69.04 亿','171 元'],
+   ['2022','18.7','15.7','5529.6 万','132.66 亿','217 元'],
+   ['2023','15.3','约 15.0','6226.7 万','−42.63 亿','−67 元'],
+   ['2024','约 17','约 14.0','6547.7 万','178.81 亿','250 元'],
+   ['2025','13.74','约 12.0','7798.1 万','154.87 亿','199 元'],
+   ['2026H1','约 10.4','11.5–11.7','3861.5 万','−60.78 亿','−157 元']],
+  ['', 'n','n','n','n','n'], [3]);
+
+document.getElementById('reqTable').innerHTML = table(
+  ['假设完全成本','所需猪价（均重 120kg）','历史参照'],
+  [['11.5（当前）','17.5','介于 2022 与 2024 年之间'],
+   ['12.0（原文档）','18.0','略低于 2022 年的 18.7'],
+   ['13.0','19.0','高于 2022 年'],
+   ['14.0（2024 年水平）','20.0','接近 2021 年的 20.3'],
+   ['15.7（2022 年水平）','21.7','接近 2019 年非瘟年的 21.9']],
+  ['n','n','']);
+
+document.getElementById('probTable').innerHTML = table(
+  ['条件','概率','依据'],
+  [['猪价 ≥ 18 元','25%','历史 19 年中 5 年达到；期货定价 13.4'],
+   ['同期成本 ≤ 12 元','35%','上轮上行期成本 +33%'],
+   ['出栏 ≥ 1 亿头','8%','公司指引 7500–8100，管理层否认量增长'],
+   ['PE ≥ 10 倍','65%','历史顶部 13.5–17.8 倍'],
+   ['四者同时成立（若独立）','约 0.5%','实际负相关，只会更低']],
+  ['','n',''], [4]);
+
+document.getElementById('driverTable').innerHTML = table(
+  ['上一轮 +4.0 元/kg 的驱动拆解','幅度估计','2027–28 重演概率'],
+  [['饲料原料涨价（发改委实测 150 元/头）','+1.3 元/kg','高——与仔猪无关，且当前处于低位'],
+   ['种猪群劣化（PSY 24 → 20）','+1.2～1.6','低——已恢复优质二元种群'],
+   ['非瘟防控投入','+0.8～1.0','已含在 11.5 里，增量低'],
+   ['新建产能爬坡（新场约 20 元/kg）','+0.5～0.8','取决于是否扩产到 1 亿头']],
+  ['','n',''], [0]);
+
+document.getElementById('costCaseTable').innerHTML = table(
+  ['情形','可重演增量','上行期成本'],
+  [['完全采纳反驳，且不扩产','+1.3','12.8 元/kg'],
+   ['采纳反驳，但扩产到 1 亿头','+1.95','13.45 元/kg'],
+   ['反驳部分成立（种猪项减半）','+2.65','14.15 元/kg']],
+  ['','n','n']);
+
+document.getElementById('sensTable').innerHTML = table(
+  ['改动','改动后股价','影响'],
+  [['猪价 18 → 14（卖方共识）','38.46 元','−76.9 元'],
+   ['出栏 1 亿 → 7800 万（公司指引）','89.99 元','−25.4 元'],
+   ['成本 12 → 13（上行期反弹）','96.14 元','−19.2 元']],
+  ['','n','n'], [0]);
+
+document.getElementById('peerTable').innerHTML = table(
+  ['指标','牧原 002714','神农 605296','东瑞 001201'],
+  [['总市值','2458.72 亿','177.97 亿','35.34 亿'],
+   ['2026 年中完全成本','11.5 元/kg','12.0 元/kg','13.8 元/kg'],
+   ['2026 年出栏目标','7500–8100 万','350 万','200 万'],
+   ['1–8 月年化出栏','7846 万','354 万','170 万'],
+   ['目标口径头均市值','3152 元','5085 元','1767 元'],
+   ['实际口径头均市值','3134 元','5027 元','2079 元'],
+   ['2026H1 归母净利','−60.78 亿','−8.09 亿','−4.25 亿'],
+   ['资产负债率','54.18%','40.75%','52.88%'],
+   ['盈亏平衡所需全国猪价','约 11.5 元/kg','约 12.0 元/kg','约 13.0 元/kg']],
+  ['','n','n','n'], [1, 5]);
+
+document.getElementById('trackTable').innerHTML = table(
+  ['指标','当前值','支持看多的阈值'],
+  [['全国能繁母猪存栏','3780 万头','跌破 3565 万头（较 2025 年末去化 10%）'],
+   ['牧原月度完全成本','11.5 元/kg','猪价上行时守住 12 元以内'],
+   ['玉米现货价','2372 元/吨','猪价上行时不突破 2600 元/吨'],
+   ['豆粕现货价','3164 元/吨','猪价上行时不突破 3600 元/吨'],
+   ['牧原生产性生物资产','89.39 亿','与能繁母猪头数同步回升'],
+   ['牧原养殖端资本开支','2026 年约 100 亿','转向养殖新建且超 150 亿'],
+   ['生猪期货 LH2707','13.41 元/kg','站上 16 元'],
+   ['牧原出栏均重','约 120 kg','突破 125 kg（政策松动信号）'],
+   ['东瑞月度出栏','8 月 11.40 万头','月度站上 18 万头（满产信号）'],
+   ['东瑞完全成本','13.8 元/kg','降至 13 元以下'],
+   ['广东-全国价差','+0.62 元/kg','随猪价上行扩大至 1.5 元以上']],
+  ['','n',''], [1, 2]);
+
+document.getElementById('c1').innerHTML = lineChart({
+  categories: ['2018','2019','2020','2021','2022','2023','2024','2025','26H1'],
+  series: [{ name:'全国生猪年均价', data:[12.7,21.9,34.1,20.3,18.7,15.3,17.0,13.74,10.39], tone:'accent' }],
+  unit: '元/kg',
+  refLines: [{ value:18, label:'原文档 18', tone:'warning' }, { value:14.34, label:'现价隐含 14.34', tone:'success' }],
+});
+document.getElementById('c2').innerHTML = lineChart({
+  categories: ['LH2611','LH2701','LH2703','LH2705','LH2707'],
+  series: [{ name:'收盘价', data:[11.24,11.84,11.68,12.73,13.41], tone:'accent' }],
+  unit: '元/kg', showValues: true,
+  refLines: [{ value:18, label:'原文档 18', tone:'warning' }],
+});
+document.getElementById('c3').innerHTML = lineChart({
+  categories: ['2018前','2019','2020','21Q1','2022','2023','2024','2025','26/8'],
+  series: [{ name:'完全成本', data:[12.0,13.47,15.0,16.0,15.7,15.0,14.0,12.0,11.5], tone:'danger' }],
+  unit: '元/kg', showValues: true,
+  refLines: [{ value:12, label:'原文档 12', tone:'warning' }],
+});
+document.getElementById('c4').innerHTML = lineChart({
+  categories: ['23末','24末','25Q2','25Q3','25末','26Q1','26Q2'],
+  series: [{ name:'能繁母猪存栏', data:[4142,4078,4043,4035,3961,3904,3780], tone:'accent' }],
+  unit: '万头',
+  refLines: [{ value:3750, label:'2026 版基准' }, { value:3565, label:'去化 10% 阈值', tone:'success' }],
+});
+document.getElementById('c5').innerHTML = lineChart({
+  categories: ['2020/03','2021/06 高点','2025 年初','2026/02'],
+  series: [{ name:'玉米现货价', data:[2130,2875,2037,2372], tone:'danger' }],
+  unit: '元/吨', showValues: true, height: 210,
+});
+
+render();
+</script>
+</body>
+</html>
