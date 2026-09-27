@@ -306,6 +306,8 @@ const SCENARIOS = [
     note:'直接采用广发证券 2027E 参数；算出的头均 336 元与广发自身预测完全吻合' },
   { id:'bear', name:'谨慎',   price:13.0,  cost:11.5, volume:7800,  weight:120, tone:'danger',
     note:'政策熨平生效、去化不彻底，猪价停在广发 2028E 水平，成本维持当前' },
+  { id:'video', name:'视频基准', price:15.0, cost:11.5, volume:8000, weight:117, tone:'',
+    note:'B 站「前事而后师」2026-09-15 视频的基准情景：2027 年底猪价破 15、出栏 8000 万头、均重 117 kg、10 倍 PE' },
 ].map(s => ({ ...s, pe: 10 }));
 
 const PARAM_DEFS = [

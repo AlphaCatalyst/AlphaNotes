@@ -6,9 +6,11 @@
 
 | 主题 | 标的 | 报告 | 交互工具 | 数据截至 |
 | --- | --- | --- | --- | --- |
-| 猪周期估值推演的辩证复核 | 牧原 002714 · 东瑞 001201 · 神农 605296 | [analysis.md](reports/hog-cycle/analysis.md) | [估值沙盘](reports/hog-cycle/sandbox.html) | 2026-09-16 |
+| 猪周期估值推演的辩证复核 | 牧原 002714 · 东瑞 001201 · 神农 605296 | [analysis.md](reports/hog-cycle/analysis.md) · [视频交叉比对](reports/hog-cycle/video-crosscheck.md) | [估值沙盘](reports/hog-cycle/sandbox.html) | 2026-09-27 |
 
-每个主题目录下固定三个文件：`source.md` 是原始推演记录，`analysis.md` 是核实与复核后的报告，`sandbox.html` 是可调参数的交互工具。保留 `source.md` 是为了让结论的演化过程可追溯——包括被推翻的部分。
+每个主题目录下至少有三个文件：`source.md` 是原始推演记录，`analysis.md` 是核实与复核后的报告，`sandbox.html` 是可调参数的交互工具。保留 `source.md` 是为了让结论的演化过程可追溯——包括被推翻的部分。
+
+研究过程中引入的外部材料（视频、研报等）单独写成比对文档，如 `video-crosscheck.md`，逐条标注哪些与已核实数据一致、哪些提供新角度、哪些站不住。视频转写原文只存本地（`transcripts/`），不随仓库公开。
 
 ## 写作约定
 

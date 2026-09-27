@@ -1,5 +1,14 @@
 .DS_Store
 _site/
+
+# 参考视频的转写正文只保留在本地：逐字稿是他人作品的完整复制，
+# 且 AI 转写错误率高，公开重发既不合适也容易误传。
+# 目录下的 README.md 与 fetch.py 是自己写的，照常提交。
+reports/**/transcripts/*.srt
+reports/**/transcripts/*.md
+reports/**/transcripts/*.meta.json
+!reports/**/transcripts/README.md
+
 .jekyll-cache/
 .jekyll-metadata
 .sass-cache/
