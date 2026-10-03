@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>猪周期估值沙盘 · 牧原股份 002714</title>
+<title>猪周期估值沙盘 · 牧原 002714 / 东瑞 001201</title>
 <style>
   :root {
     --bg: #ffffff; --fg: #17181a; --muted: #6b7280; --faint: #9ca3af;
@@ -94,9 +94,9 @@
 
 <h1>猪周期估值沙盘</h1>
 <p class="sub">
-  对原始推演记录中牧原/东瑞估值模型的参数化重估。牧原股份 002714.SZ，价格基准 2026-09-14 收盘
-  42.59 元、总市值 2458.72 亿、总股本 57.73 亿股。完整论证见
-  <a href="https://github.com/AlphaCatalyst/AlphaNotes/blob/main/reports/hog-cycle/analysis.md">辩证复核</a>。
+  对原始推演记录中牧原/东瑞估值模型的参数化重估。价格基准 2026-09-14 收盘：牧原 42.59 元（总市值 2458.72 亿、总股本 57.73 亿股），东瑞 13.71 元（总市值 35.34 亿、总股本 2.5778 亿股）。上方可切换公司；东瑞模式多一个广东溢价滑杆，售价 = 全国均价 + 溢价。完整论证见
+  <a href="https://github.com/AlphaCatalyst/AlphaNotes/blob/main/reports/hog-cycle/analysis.md">辩证复核</a>
+  第九章 9.8、9.9。
 </p>
 
 <!-- ============ 反向估值 ============ -->
@@ -111,7 +111,7 @@
   </div>
   <p class="note" style="margin-top:14px; border-top:1px solid var(--hair); padding-top:12px;">
     市场定价、卖方共识、期货曲线三者一致指向 14 元左右。原文档的 18 元要成立，需要比这个共识高 26%–34%。
-    反解公式：市值 ÷ PE ÷ 0.925 ÷ 出栏量 ÷ 均重 + 完全成本。
+    反解公式：市值 ÷ PE ÷ 归母折算 ÷ 出栏量 ÷ 均重 + 完全成本。牧原折算 0.925，东瑞 0.95，东瑞再减去广东溢价才得到全国均价。
     <br><span class="em">左侧首格随下方滑杆联动</span>——它反解的是"在你设定的成本／出栏／PE 下，当前股价对应多高的猪价"。
     按基准口径（成本 11.5、出栏 7800 万头、PE 10）为 <span class="em">14.34 元/kg</span>，也就是下方猪价图里那条绿色参考线。
   </p>
@@ -120,6 +120,10 @@
 <!-- ============ 沙盘 ============ -->
 <h2>参数沙盘</h2>
 <div class="row" style="margin-bottom:12px;">
+  <span id="companies" class="row" style="gap:8px;">
+    <button class="pill on" type="button" data-co="my">牧原</button>
+    <button class="pill" type="button" data-co="dr">东瑞</button>
+  </span>
   <span id="presets" class="row" style="gap:8px;"></span>
   <span style="flex:1"></span>
   <button class="btn" id="resetNow">重置到现状</button>
@@ -271,6 +275,21 @@
   牧原与神农假设售价约等于全国均价。
 </p>
 
+<!-- ============ 18/20 校准 ============ -->
+<h2>全国 18、广东 20</h2>
+<p class="sub">
+  2026-09-29 给定的情景：全国年均 18 元，广东溢价 2 元，东瑞售价 20 元。牧原归母 × 0.925、均重 120 kg、出栏 7800 万头；东瑞归母 × 0.95、均重 115 kg。PE 都是 10 倍。成本反弹按 0.5–1.3 元/kg 对称加上去。这一节的数字不随滑杆变化，滑杆在上方东瑞模式里。
+</p>
+<div class="framed"><table id="calTable"></table></div>
+<p class="note" style="margin-bottom:14px;">
+  东瑞 0.95 的归母折算、115 kg 均重是本页假设，公告没有给出可直接套用的系数。成本 11.5 那一行是「猪价到 18 但成本不反弹」的参照，不是基准情形。
+</p>
+<div class="framed"><table id="pathTable"></table></div>
+<p class="note">
+  路径表的溢价阶梯是 ≤14 元取 0.8、16 元取 1.4、18 元取 2.0。13 元和 14 元的牧原成本沿用谨慎情景与广发 2027E，所以目标价 22.50、41.99 与上方情景表一致。东瑞出栏固定 200 万头；13.0 的成本低于其当前月度 13.8，低猪价一端对东瑞偏宽。
+  溢价从 0.8 走到 2.0（东瑞 200 万头、成本 13.0）只把涨幅从 +258.6% 抬到 +332.8%。
+</p>
+
 <!-- ============ 跟踪 ============ -->
 <h2>可证伪的跟踪指标</h2>
 <div class="framed"><table id="trackTable"></table></div>
@@ -281,8 +300,8 @@
 
 <hr>
 <p class="note">
-  数据截至 2026-09-16。公司公告与交易所数据为一手来源；月度完全成本为管理层口头表述，存在 ±0.1–0.2 元/kg 模糊度；
-  价格柔性推演、成本驱动拆解、情景矩阵数值与头均市值重算为本报告测算。完整来源与可信度分级见
+  行情与公告核对截至 2026-09-16；全国 18 / 广东 20 这组情景补于 2026-10-03，价格锚点仍是 2026-09-14 收盘。公司公告与交易所数据为一手来源；月度完全成本为管理层口头表述，存在 ±0.1–0.2 元/kg 模糊度；
+  价格柔性推演、成本驱动拆解、情景矩阵、东瑞 0.95 折算与头均市值重算为本报告测算。完整来源与可信度分级见
   <a href="https://github.com/AlphaCatalyst/AlphaNotes/blob/main/reports/hog-cycle/analysis.md">辩证复核</a> 附录 A。本页面不构成投资建议。
 </p>
 
@@ -290,8 +309,13 @@
 
 <script>
 /* ===================== 常量 ===================== */
-const SHARES = 57.73, CUR_PRICE = 42.59, CUR_CAP = 2458.72;
-const PEAK_CAP = 4770.6, NET_ASSET = 801.87, ANNUALIZED_VOL = 7846, CONV = 0.925;
+const CO = {
+  my: { id:'my', name:'牧原', shares:57.73, curPrice:42.59, curCap:2458.72,
+        conv:0.925, peakCap:4770.6, netAsset:801.87, annVol:7846 },
+  dr: { id:'dr', name:'东瑞', shares:2.5778, curPrice:13.71, curCap:35.34, conv:0.95, annVol:170 },
+};
+let company = 'my';
+const cur = () => CO[company];
 
 const SCENARIOS = [
   { id:'now',  name:'现状',   price:10.9,  cost:11.5, volume:7800,  weight:120, tone:'',
@@ -308,32 +332,59 @@ const SCENARIOS = [
     note:'政策熨平生效、去化不彻底，猪价停在广发 2028E 水平，成本维持当前' },
   { id:'video', name:'视频基准', price:15.0, cost:11.5, volume:8000, weight:117, tone:'',
     note:'B 站「前事而后师」2026-09-15 视频的基准情景：2027 年底猪价破 15、出栏 8000 万头、均重 117 kg、10 倍 PE' },
-].map(s => ({ ...s, pe: 10 }));
+].map(s => ({ ...s, pe: 10, premium: 0 }));
 
-const PARAM_DEFS = [
+const DR_SCENARIOS = [
+  { id:'now', name:'现状', price:10.9, premium:0.8, cost:13.8, volume:170, weight:115, pe:10, tone:'',
+    note:'全国均价约 10.9，溢价取 2026 年 8 月的 0.8，成本取 7 月 13.8，出栏取 1–8 月年化 170 万头' },
+  { id:'mid', name:'14 元附近', price:14, premium:0.8, cost:13.0, volume:200, weight:115, pe:10, tone:'accent',
+    note:'全国猪价取卖方 2027 年附近的 14 元，溢价维持 0.8，成本取 13.0' },
+  { id:'p18', name:'18/20', price:18, premium:2.0, cost:13.0, volume:200, weight:115, pe:10, tone:'warning',
+    note:'全国年均 18、广东溢价 2（售价 20）、出栏 200 万、成本 13.0。归母约 15.3 亿，与崔哥头均 750 元的测算几乎重合' },
+  { id:'p18c', name:'18/20 谨慎', price:18, premium:2.0, cost:13.8, volume:170, weight:115, pe:10, tone:'danger',
+    note:'出栏改用年化 170 万，成本 13.8。目标未兑现再叠加 1.3 元饲料反弹时，把成本滑到 15.1' },
+];
+
+const MY_DEFS = [
   { key:'price',  label:'生猪均价',   min:9,    max:24,    step:0.1, unit:' 元/kg', hint:'2025 年全国 13.74｜2022 年 18.7｜2020 年 34.1' },
   { key:'cost',   label:'完全成本',   min:10.5, max:16,    step:0.1, unit:' 元/kg', hint:'2026/8 实为 11.5｜上轮上行期峰值 16.0' },
   { key:'volume', label:'商品猪出栏', min:6000, max:11000, step:100, unit:' 万头',  hint:'2026 年公司指引 7500–8100｜2025 年实际 7798' },
   { key:'weight', label:'出栏均重',   min:105,  max:135,   step:1,   unit:' kg',    hint:'发改委要求控制在 120 kg 左右' },
   { key:'pe',     label:'目标 PE',    min:5,    max:20,    step:0.5, unit:' 倍',    hint:'上轮顶部 17.4–17.8｜市场对 2027E 给 10.53' },
 ];
+const DR_DEFS = [
+  { key:'price',   label:'全国均价',   min:9,   max:24,  step:0.1, unit:' 元/kg', hint:'东瑞售价 = 全国均价 + 下方溢价' },
+  { key:'premium', label:'广东溢价',   min:0,   max:3,   step:0.1, unit:' 元/kg', hint:'2026/8 约 0.8｜调运套利区间 1.5–2.5｜本情景上限 2.0' },
+  { key:'cost',    label:'完全成本',   min:11,  max:16,  step:0.1, unit:' 元/kg', hint:'2026/7 实为 13.8｜2027 年展望低于 12.5' },
+  { key:'volume',  label:'商品猪出栏', min:100, max:300, step:10,  unit:' 万头',  hint:'1–8 月年化约 170｜公司目标 200｜中期目标 300 以上' },
+  { key:'weight',  label:'出栏均重',   min:105, max:135, step:1,   unit:' kg',    hint:'供港猪偏重，本页默认 115 kg' },
+  { key:'pe',      label:'目标 PE',    min:5,   max:20,  step:0.5, unit:' 倍',    hint:'与牧原情景相同，默认 10 倍' },
+];
+const defs = () => (company === 'dr' ? DR_DEFS : MY_DEFS);
+const activeScenarios = () => (company === 'dr' ? DR_SCENARIOS : SCENARIOS);
 
 let P = { ...pick(SCENARIOS.find(s => s.id === 'doc')) };
-function pick(s) { return { price:s.price, cost:s.cost, volume:s.volume, weight:s.weight, pe:s.pe }; }
+function pick(s) {
+  return { price:s.price, premium:s.premium || 0, cost:s.cost, volume:s.volume, weight:s.weight, pe:s.pe };
+}
 
 /* ===================== 计算 ===================== */
-function compute(p) {
-  const headProfit = (p.price - p.cost) * p.weight;
+function sellOf(p, co) { return p.price + (co.id === 'dr' ? (p.premium || 0) : 0); }
+function compute(p, co = CO.my) {
+  const sell = sellOf(p, co);
+  const headProfit = (sell - p.cost) * p.weight;
   const segProfit  = headProfit * p.volume / 10000;
-  const netProfit  = segProfit * CONV;
+  const netProfit  = segProfit * co.conv;
   const targetCap  = netProfit * p.pe;
-  const targetPrice = targetCap / SHARES;
-  return { headProfit, segProfit, netProfit, targetCap, targetPrice, upside: targetPrice / CUR_PRICE - 1 };
+  const targetPrice = targetCap / co.shares;
+  return { sell, headProfit, segProfit, netProfit, targetCap, targetPrice, upside: targetPrice / co.curPrice - 1 };
 }
-function impliedHogPrice(p) {
-  const impliedSeg  = (CUR_CAP / p.pe) / CONV;
+function impliedHogPrice(p, co = CO.my) {
+  const impliedSeg  = (co.curCap / p.pe) / co.conv;
   const impliedHead = impliedSeg * 10000 / p.volume;
-  return { impliedHead, impliedPrice: p.cost + impliedHead / p.weight };
+  const impliedSell = p.cost + impliedHead / p.weight;
+  const premium = co.id === 'dr' ? (p.premium || 0) : 0;
+  return { impliedHead, impliedSell, impliedPrice: impliedSell - premium };
 }
 const r1 = n => n.toFixed(1), r2 = n => n.toFixed(2), rd = n => Math.round(n);
 /* 保留 1 位小数，但 17.49 这类两位小数的值不四舍五入掉 */
@@ -398,77 +449,110 @@ function table(headers, rows, aligns = [], hlRows = []) {
 }
 
 /* ===================== 渲染：控件 ===================== */
-document.getElementById('controls').innerHTML =
-  '<h3 style="margin-bottom:12px">输入假设</h3>' +
-  PARAM_DEFS.map(d => `
-    <div class="slider">
-      <div class="top"><span class="name">${d.label}</span><span class="val" id="v-${d.key}"></span></div>
-      <input type="range" id="s-${d.key}" min="${d.min}" max="${d.max}" step="${d.step}">
-      <div class="hint">${d.hint}</div>
-    </div>`).join('');
-
-PARAM_DEFS.forEach(d => {
-  document.getElementById('s-' + d.key).addEventListener('input', e => {
-    P[d.key] = Number(e.target.value);
-    render();
+function buildControls() {
+  document.getElementById('controls').innerHTML =
+    '<h3 style="margin-bottom:12px">输入假设 · ' + cur().name + '</h3>' +
+    defs().map(d => `
+      <div class="slider">
+        <div class="top"><span class="name">${d.label}</span><span class="val" id="v-${d.key}"></span></div>
+        <input type="range" id="s-${d.key}" min="${d.min}" max="${d.max}" step="${d.step}">
+        <div class="hint">${d.hint}</div>
+      </div>`).join('');
+  defs().forEach(d => {
+    document.getElementById('s-' + d.key).addEventListener('input', e => {
+      P[d.key] = Number(e.target.value);
+      render();
+    });
   });
-});
-
-document.getElementById('presets').innerHTML = SCENARIOS.map(s =>
-  `<button class="pill" data-id="${s.id}" title="${s.note}">${s.name}</button>`).join('');
-document.querySelectorAll('#presets .pill').forEach(btn => {
+  document.getElementById('presets').innerHTML = activeScenarios().map(s =>
+    `<button class="pill" type="button" data-id="${s.id}" title="${s.note}">${s.name}</button>`).join('');
+  document.querySelectorAll('#presets .pill').forEach(btn => {
+    btn.addEventListener('click', () => {
+      P = pick(activeScenarios().find(s => s.id === btn.dataset.id));
+      render();
+    });
+  });
+  document.getElementById('resetDoc').textContent = company === 'dr' ? '回到 18/20' : '回到原文档';
+}
+document.querySelectorAll('#companies .pill').forEach(btn => {
   btn.addEventListener('click', () => {
-    P = pick(SCENARIOS.find(s => s.id === btn.dataset.id));
+    company = btn.dataset.co;
+    P = pick(activeScenarios().find(s => s.id === (company === 'dr' ? 'p18' : 'doc')));
+    buildControls();
     render();
   });
 });
-document.getElementById('resetNow').onclick = () => { P = pick(SCENARIOS.find(s => s.id === 'now')); render(); };
-document.getElementById('resetDoc').onclick = () => { P = pick(SCENARIOS.find(s => s.id === 'doc')); render(); };
+document.getElementById('resetNow').onclick = () => {
+  P = pick(activeScenarios().find(s => s.id === 'now'));
+  render();
+};
+document.getElementById('resetDoc').onclick = () => {
+  P = pick(activeScenarios().find(s => s.id === (company === 'dr' ? 'p18' : 'doc')));
+  render();
+};
 
 /* ===================== 渲染：动态部分 ===================== */
 function render() {
-  PARAM_DEFS.forEach(d => {
+  const co = cur();
+  defs().forEach(d => {
     document.getElementById('s-' + d.key).value = P[d.key];
     document.getElementById('v-' + d.key).textContent = P[d.key] + d.unit;
   });
 
-  const o = compute(P), im = impliedHogPrice(P);
+  const o = compute(P, co), im = impliedHogPrice(P, co);
   const bad = o.netProfit <= 0;
   const tone = o.upside > 0.5 ? 't-success' : o.upside < -0.1 ? 't-danger' : 't-warning';
 
   document.getElementById('implied').textContent = r2(im.impliedPrice) + ' 元/kg';
-  document.getElementById('impliedLabel').textContent =
-    `当前市值反解（PE ${P.pe} 倍、出栏 ${P.volume} 万头、成本 ${P.cost} 元）`;
+  document.getElementById('impliedLabel').textContent = co.id === 'dr'
+    ? `反解全国均价（售价 ${r2(im.impliedSell)}，已扣溢价 ${P.premium}）`
+    : `当前市值反解（PE ${P.pe} 倍、出栏 ${P.volume} 万头、成本 ${P.cost} 元）`;
+
+  const lossStats = co.id === 'my' ? `
+    <div class="stat"><div class="v t-accent">${r2(co.curCap / co.netAsset)} 倍</div><div class="l">改用 PB（净资产 801.87 亿）</div></div>
+    <div class="stat"><div class="v t-accent">${rd(co.curCap * 10000 / co.annVol)} 元</div><div class="l">改用头均市值（年化 7846 万头）</div></div>
+    <div class="stat"><div class="v t-danger">PE 法失效</div><div class="l">盈利为负，倍数无意义</div></div>` : `
+    <div class="stat"><div class="v t-accent">${rd(co.curCap * 10000 / P.volume)} 元</div><div class="l">改用头均市值（按当前出栏假设）</div></div>
+    <div class="stat"><div class="v t-danger">0.34 倍</div><div class="l">货币资金 / 短期借款</div></div>
+    <div class="stat"><div class="v t-danger">PE 法失效</div><div class="l">盈利为负，倍数无意义</div></div>`;
 
   document.getElementById('outputs').innerHTML = `
     <div class="stat"><div class="v ${o.headProfit <= 0 ? 't-danger' : ''}">${rd(o.headProfit)} 元</div><div class="l">头均利润</div></div>
     <div class="stat"><div class="v ${o.segProfit <= 0 ? 't-danger' : ''}">${rd(o.segProfit)} 亿</div><div class="l">养殖板块经营利润</div></div>
-    <div class="stat"><div class="v ${bad ? 't-danger' : ''}">${rd(o.netProfit)} 亿</div><div class="l">归母净利（× 0.925）</div></div>
-    ` + (bad ? `
-    <div class="stat"><div class="v t-accent">${r2(CUR_CAP / NET_ASSET)} 倍</div><div class="l">改用 PB（净资产 801.87 亿）</div></div>
-    <div class="stat"><div class="v t-accent">${rd(CUR_CAP * 10000 / ANNUALIZED_VOL)} 元</div><div class="l">改用头均市值（年化 7846 万头）</div></div>
-    <div class="stat"><div class="v t-danger">PE 法失效</div><div class="l">盈利为负，倍数无意义</div></div>` : `
-    <div class="stat"><div class="v">${rd(o.targetCap)} 亿</div><div class="l">目标市值（历史峰值 ${PEAK_CAP} 亿）</div></div>
+    <div class="stat"><div class="v ${bad ? 't-danger' : ''}">${rd(o.netProfit)} 亿</div><div class="l">归母净利（× ${co.conv}）</div></div>
+    ` + (bad ? lossStats : `
+    <div class="stat"><div class="v">${rd(o.targetCap)} 亿</div><div class="l">${co.peakCap ? '目标市值（历史峰值 ' + co.peakCap + ' 亿）' : '目标市值'}</div></div>
     <div class="stat"><div class="v ${tone}">${r2(o.targetPrice)} 元</div><div class="l">对应股价</div></div>
-    <div class="stat"><div class="v ${tone}">${pct(o.upside)}</div><div class="l">相对现价 42.59 元</div></div>`);
+    <div class="stat"><div class="v ${tone}">${pct(o.upside)}</div><div class="l">相对现价 ${co.curPrice} 元</div></div>`);
 
-  document.getElementById('pbNote').innerHTML = bad ? `
+  document.getElementById('pbNote').innerHTML = bad ? (co.id === 'my' ? `
     <div class="callout c-danger"><div class="h">当前参数下 PE 估值法不适用</div>
     头均利润为负，市值 ÷ 负利润没有意义。这正是周期底部的真实状态——也是券商在亏损期改用 PB 和头均市值的原因。
     华金证券的规则是「在亏损期，选择 PB 估值风险得到较大释放的标的」；华创证券给的行业水位是头部猪企头均市值
-    2500–3000 元、二线 1500–2000 元。把猪价滑杆推到 11.5 元以上，PE 法才重新有效。</div>` : '';
+    2500–3000 元、二线 1500–2000 元。把猪价滑杆推到 11.5 元以上，PE 法才重新有效。</div>` : `
+    <div class="callout c-danger"><div class="h">当前参数下 PE 估值法不适用</div>
+    东瑞按这一组售价和成本仍在亏损。2026 年将是第四个亏损年，货币资金对短期借款约 0.34 倍。
+    猪价停在这一带时，先起作用的是筹资和股本稀释，而不是 PE。</div>`) : '';
 
-  const act = SCENARIOS.find(s => PARAM_DEFS.every(d => s[d.key] === P[d.key]));
+  const act = activeScenarios().find(s => defs().every(d => s[d.key] === P[d.key]));
   document.querySelectorAll('#presets .pill').forEach(b =>
     b.classList.toggle('on', !!act && b.dataset.id === act.id));
+  document.querySelectorAll('#companies .pill').forEach(b =>
+    b.classList.toggle('on', b.dataset.co === company));
 
-  document.getElementById('chain').innerHTML = `
-    头均利润 =（${P.price} − ${P.cost}）× ${P.weight} = <span class="em">${rd(o.headProfit)} 元</span><br>
+  const sellLine = co.id === 'dr'
+    ? `售价 = 全国 ${P.price} + 溢价 ${P.premium} = <span class="em">${rp(o.sell)} 元/kg</span><br>`
+    : '';
+  const haircutNote = co.id === 'dr'
+    ? '0.95 是本页假设：东瑞屠宰占比更低，公告没有给出可直接套用的系数'
+    : '完全成本已含三费与折旧，养殖业免所得税，0.925 只扣少数股东权益与屠宰板块';
+  document.getElementById('chain').innerHTML = sellLine + `
+    头均利润 =（${rp(o.sell)} − ${P.cost}）× ${P.weight} = <span class="em">${rd(o.headProfit)} 元</span><br>
     板块经营利润 = ${rd(o.headProfit)} × ${P.volume} 万头 = <span class="em">${r1(o.segProfit)} 亿</span><br>
-    归母净利 = ${r1(o.segProfit)} × 0.925 = <span class="em">${r1(o.netProfit)} 亿</span>
-    　（完全成本已含三费与折旧，养殖业免所得税，仅扣少数股东权益与屠宰板块）<br>
+    归母净利 = ${r1(o.segProfit)} × ${co.conv} = <span class="em">${r1(o.netProfit)} 亿</span>
+    　（${haircutNote}）<br>
     目标市值 = ${r1(o.netProfit)} × ${P.pe} = <span class="em">${r1(o.targetCap)} 亿</span>
-    　→ 股价 = 市值 ÷ 57.73 亿股 = <span class="em">${r2(o.targetPrice)} 元</span>`;
+    　→ 股价 = 市值 ÷ ${co.shares} 亿股 = <span class="em">${r2(o.targetPrice)} 元</span>`;
 }
 
 /* ===================== 渲染：静态表格与图 ===================== */
@@ -593,6 +677,45 @@ document.getElementById('c5').innerHTML = lineChart({
   unit: '元/吨', showValues: true, height: 210,
 });
 
+(function fillCalibration() {
+  const netText = n => (Math.abs(n) >= 100 ? String(Math.round(n)) : n.toFixed(1)) + ' 亿';
+  const base = (extra) => ({ price:18, premium:0, weight:120, pe:10, volume:7800, ...extra });
+  const cases = [
+    ['牧原 · 成本 11.5，参照', CO.my, base({ cost:11.5 })],
+    ['牧原 · 成本 12.0', CO.my, base({ cost:12.0 })],
+    ['牧原 · 成本 12.8', CO.my, base({ cost:12.8 })],
+    ['东瑞 · 200 万头、成本 13.0', CO.dr, base({ cost:13.0, premium:2, volume:200, weight:115 })],
+    ['东瑞 · 170 万头、成本 13.8', CO.dr, base({ cost:13.8, premium:2, volume:170, weight:115 })],
+    ['东瑞 · 170 万头、成本 15.1', CO.dr, base({ cost:15.1, premium:2, volume:170, weight:115 })],
+  ];
+  document.getElementById('calTable').innerHTML = table(
+    ['情形','成本','归母净利','目标价','相对现价','现价 PE'],
+    cases.map(([name, co, p]) => {
+      const r = compute(p, co);
+      return [name, rp(p.cost), netText(r.netProfit), r2(r.targetPrice), pct(r.upside),
+        (co.curCap / r.netProfit).toFixed(1) + ' 倍'];
+    }),
+    ['','n','n','n','n','n'], [3]);
+
+  const path = [
+    [13, 0.8, 11.5, 13.0],
+    [14, 0.8, 11.2, 13.0],
+    [16, 1.4, 11.8, 13.0],
+    [18, 2.0, 12.4, 13.4],
+  ];
+  document.getElementById('pathTable').innerHTML = table(
+    ['全国均价','溢价','牧原成本','东瑞成本','牧原目标价','东瑞目标价（200 万头）'],
+    path.map(([nat, prem, myc, drc]) => {
+      const mp = compute({ price:nat, premium:0, cost:myc, volume:7800, weight:120, pe:10 }, CO.my);
+      const dp = compute({ price:nat, premium:prem, cost:drc, volume:200, weight:115, pe:10 }, CO.dr);
+      return [rp(nat), rp(prem), rp(myc), rp(drc),
+        r2(mp.targetPrice) + '（' + pct(mp.upside) + '）',
+        r2(dp.targetPrice) + '（' + pct(dp.upside) + '）'];
+    }),
+    ['n','n','n','n','n','n']);
+})();
+
+buildControls();
 render();
 </script>
 </body>
