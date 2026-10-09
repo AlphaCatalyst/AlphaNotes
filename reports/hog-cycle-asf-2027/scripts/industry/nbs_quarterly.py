@@ -18,7 +18,7 @@ from pathlib import Path
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from ind_common import PROC, RAW, fetch, flat_text, soup, table_rows, to_float, write_csv  # noqa: E402
+from ind_common import PROC, RAW, fetch, flat_text, soup, table_rows, write_csv  # noqa: E402
 from nbs_index import all_known, collect_anchors, find_release  # noqa: E402
 
 SUB = "nbs"

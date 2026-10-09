@@ -1,0 +1,6 @@
+a,b,n_months,corr,mean_b_minus_a,first,last
+moa_live_hog,nbs_tenday,43,0.994,-0.05,2018-01-01,2022-12-01
+moa_live_hog,nxin_national,102,0.997,-0.15,2016-11-01,2026-09-01
+nxin_south,gd_slaughter_purchase,69,0.996,1.1,2020-12-01,2026-08-01
+gd_farm_hog,gd_slaughter_purchase,42,0.998,0.4,2022-01-01,2025-07-01
+nxin_gd_quote,gd_slaughter_purchase,20,0.987,1.58,2025-01-01,2026-08-01

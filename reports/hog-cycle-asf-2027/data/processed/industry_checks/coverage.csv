@@ -1,0 +1,25 @@
+file,rows,first,last,note
+nbs_quarterly.csv,42,2016Q1,2026Q2,"hog_inv 42, sow 9, slaughter 42, pork 42 non-null"
+moa_sows_monthly.csv[4000个监测点样本],24,2015-01,2016-12,
+moa_sows_monthly.csv[400县样本],33,2017-01,2019-09,
+moa_sows_monthly.csv[400县样本(新闻稿)],5,2019-11,2020-05,
+moa_sows_monthly.csv[全国(新闻稿)],12,2019-10,2021-02,
+moa_sows_monthly.csv[全国绝对量(季末)],19,2021-12,2026-06,
+moa_sows_monthly.csv[全国绝对量(月末)],31,2022-01,2025-10,
+moa_sows_monthly.csv[国家统计局(经农业农村部稿件转述)],2,2020-12,2021-06,
+moa_weekly_prices.csv[前一周列(下一周周报)],18,2016W47,2021W17,
+moa_weekly_prices.csv[去年同期列(次年同周周报)],86,2016W01,2019W53,
+moa_weekly_prices.csv[本周(原文)],409,2016W48,2026W40,
+nxin_region_weekly.csv[东北],548,2015-10-19,2026-09-28,
+nxin_region_weekly.csv[全国],589,2015-01-05,2026-09-28,
+nxin_region_weekly.csv[华东],548,2015-10-19,2026-09-28,
+nxin_region_weekly.csv[华中],548,2015-10-19,2026-09-28,
+nxin_region_weekly.csv[华北],548,2015-10-19,2026-09-28,
+nxin_region_weekly.csv[华南],548,2015-10-19,2026-09-28,
+nxin_region_weekly.csv[西北],548,2015-10-19,2026-09-28,
+nxin_region_weekly.csv[西南],548,2015-10-19,2026-09-28,
+nxin_province_daily.csv,20672,2025-01-01,2026-10-08,32 areas
+gd_prices.csv[屠宰企业价格专报(双周)],26,2020-12-26,2021-12-11,
+gd_prices.csv[屠宰生猪及肉品价格(月)],69,2020-12-01,2026-08-01,
+gd_prices.csv[生猪产能监测(月)],42,2022-01-01,2025-07-01,
+nbs_tenday_hog.csv,176,2018-01上旬,2022-12中旬,4 periods missing

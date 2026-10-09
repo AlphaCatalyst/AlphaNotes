@@ -17,7 +17,7 @@ from pathlib import Path
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from ind_common import PROC, RAW, SITE_NBS, fetch, sogov_search, soup, table_rows, to_float, write_csv  # noqa: E402
+from ind_common import PROC, SITE_NBS, fetch, sogov_search, soup, table_rows, write_csv  # noqa: E402
 from nbs_index import all_known, collect_anchors, find_release  # noqa: E402
 
 SUB = "nbs_tenday"
@@ -42,6 +42,10 @@ def windows(y, m, x):
 def parse(b: bytes) -> dict:
     s = soup(b)
     rec = {}
+    from ind_common import flat_text
+    m = re.search(r"监测显示[，,](\d{4}年)?(\d{1,2})月(上|中|下)旬与(\d{1,2})月(上|中|下)旬相比", flat_text(soup(b)))
+    if m:
+        rec["compare_base"] = f"{m.group(4)}月{m.group(5)}旬"
     for tb in s.find_all("table"):
         for r in table_rows(tb):
             if not r:
@@ -99,11 +103,31 @@ def main():
                 print(period, rec.get("release_date"), rec.get("hog"), rec.get("found_via"))
                 rows.append(rec)
     df = pd.DataFrame(rows)
+    # a missing 旬 whose successor is compared with the 旬 before it was not published
+    for i in range(len(df)):
+        if pd.notna(df.loc[i].get("url")) or i + 1 >= len(df):
+            continue
+        nxt = df.loc[i + 1]
+        prev_label = None
+        if i >= 1:
+            pp = df.loc[i - 1, "period"]
+            prev_label = f"{int(pp[5:7])}月{pp[7]}旬"
+        own_label = f"{int(df.loc[i, 'period'][5:7])}月{df.loc[i, 'period'][7]}旬"
+        if prev_label and nxt.get("compare_base") == prev_label:
+            df.loc[i, "note"] = f"未单独发布:下一期({nxt['period']})正文以{prev_label}为比较基期"
+        elif nxt.get("compare_base") == own_label:
+            df.loc[i, "note"] = (f"春节旬无单独发布稿(相邻发布稿ID逐一核查,空缺ID为404);下一期({nxt['period']})"
+                                 f"正文仍以{own_label}为比较基期,即数据存在但未公开")
+            if pd.notna(nxt.get("hog")) and pd.notna(nxt.get("hog_chg")):
+                df.loc[i, "hog_implied"] = round(nxt["hog"] - nxt["hog_chg"], 2)
+                df.loc[i, "implied_from"] = nxt["url"]
     out = pd.DataFrame({
         "period": df.period, "price_yuan_kg": df.get("hog"), "release_date": df.get("release_date"),
         "url": df.get("url"), "chg_yuan_kg": df.get("hog_chg"), "chg_pct": df.get("hog_chg_pct"),
         "item": df.get("hog_name"), "unit": df.get("hog_unit"), "corn_yuan_t": df.get("corn"),
-        "soymeal_yuan_t": df.get("soymeal"), "title": df.get("title"), "found_via": df.get("found_via"),
+        "soymeal_yuan_t": df.get("soymeal"), "compare_base": df.get("compare_base"),
+        "price_implied_yuan_kg": df.get("hog_implied"), "implied_from_url": df.get("implied_from"),
+        "title": df.get("title"), "found_via": df.get("found_via"),
         "note": df.get("note")})
     name = "nbs_tenday_hog.csv" if (Y0, Y1) == (2018, 2022) else f"nbs_tenday_hog_{Y0}_{Y1}.csv"
     write_csv(out, PROC / name)

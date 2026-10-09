@@ -14,7 +14,6 @@ Probe results are cached in data/raw/industry/nbs/_probe_cache.csv.
 from __future__ import annotations
 
 import csv
-import datetime as dt
 import re
 import sys
 import time

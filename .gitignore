@@ -13,12 +13,17 @@ reports/**/transcripts/*.meta.json
 # 整段复制他人数据库不适合公开，且可由 scripts/ 里的抓取脚本重新生成。
 # 派生结果、政府统计和公告摘录照常提交。
 reports/hog-cycle-asf-2027/data/raw/
+# 子研究的抓取缓存与临时脚本（含公告原文、旧报告截图），同样只留本地
+reports/hog-cycle-asf-2027/_work/
+reports/hog-cycle-asf-2027/research/*/_raw/
+reports/hog-cycle-asf-2027/research/*/_work/
 reports/hog-cycle-asf-2027/data/processed/stock_daily.csv
 reports/hog-cycle-asf-2027/data/processed/index_daily.csv
 reports/hog-cycle-asf-2027/data/processed/futures_lh_daily.csv
 reports/hog-cycle-asf-2027/data/processed/fut_main_mapped.csv
 reports/hog-cycle-asf-2027/data/processed/nxin_*.csv
 reports/hog-cycle-asf-2027/data/processed/sales_ann_text.csv
+reports/hog-cycle-asf-2027/data/processed/industry_checks/monthly_price_crosscheck.csv
 __pycache__/
 
 .jekyll-cache/

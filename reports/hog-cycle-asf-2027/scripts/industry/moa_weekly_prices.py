@@ -310,6 +310,8 @@ def main():
         for key, col, basis in targets:
             if key in have or key in back:
                 continue
+            if key[1] > dt.date(key[0], 12, 28).isocalendar()[1]:
+                continue  # e.g. 2020W53's 去年同期 repeats 2019W52; 2019 has no week 53
             vals = {v: r.get(f"{v}_{col}") for v in TEXT_PATS}
             if all(pd.isna(x) for x in vals.values()):
                 continue

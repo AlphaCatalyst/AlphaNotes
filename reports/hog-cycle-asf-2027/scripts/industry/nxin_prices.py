@@ -29,6 +29,16 @@ REGIONS = {0: "全国", 1: "东北", 2: "华北", 3: "华中", 4: "华东", 5: "
 BASE = "https://hqb.nxin.com"
 
 
+def unwrap(v):
+    """Highlighted (max/min) chart points come as "{'y': 17.0, 'marker': {...}}" strings or dicts."""
+    if isinstance(v, dict):
+        return v.get("y")
+    if isinstance(v, str) and v.lstrip().startswith("{"):
+        m = re.search(r"['\"]y['\"]\s*:\s*(-?\d+(?:\.\d+)?)", v)
+        return float(m.group(1)) if m else None
+    return v
+
+
 def index_weekly() -> pd.DataFrame:
     # evidence of the regionId list
     fetch(f"{BASE}/pigindex/getPigIndex.shtml?regionId=0", SUB, name="getPigIndex_region0.html", force=True)
@@ -74,9 +84,11 @@ def province_daily() -> pd.DataFrame:
         j = json.loads(decode(bb))["pig"][0]
         for series, year in (("data1", today.year), ("data2", today.year - 1)):
             for md, v in zip(j["date"], j[series]):
+                v = unwrap(v)
                 try:
                     d = dt.date(year, int(md[:2]), int(md[3:5]))
-                except ValueError:
+                    v = float(v) if v not in (None, "") else None
+                except (ValueError, TypeError):
                     continue
                 rows.append(dict(date=d.isoformat(), province=nm, area_id=aid, price=v,
                                  goods="生猪(外三元)", source_url=url))
@@ -85,7 +97,7 @@ def province_daily() -> pd.DataFrame:
         b30 = fetch(u30, SUB, name=f"chq_goods1_area{aid}_30.json", force=True)
         if b30:
             j30 = json.loads(decode(b30))["pig"][0]
-            last_md, last_v = j30["date"][-1], j30["data"][-1]
+            last_md, last_v = j30["date"][-1], unwrap(j30["data"][-1])
             idx = len(j["data1"]) - 1
             checks.append(dict(area=nm, last30_date=last_md, last30_price=last_v,
                                data1_last_date=j["date"][idx], data1_last_price=j["data1"][idx]))
