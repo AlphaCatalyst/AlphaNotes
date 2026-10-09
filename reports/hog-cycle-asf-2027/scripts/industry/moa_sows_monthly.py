@@ -189,12 +189,14 @@ def moa_jdsj() -> pd.DataFrame:
 # C. press releases
 # ---------------------------------------------------------------------------
 OK_PATH = re.compile(r"moa\.gov\.cn/(xw/(zwdt|bmdt|tpxw|zxfb|shipin)|hd/|ztzl/szcpxx|gk/|govpublic/)|"
-                     r"xmsyj\.moa\.gov\.cn/(gzdt|zcjd|jcyj)|jhs\.moa\.gov\.cn/|scs\.moa\.gov\.cn/(jcyj|tpxw)|"
+                     r"xmsyj\.moa\.gov\.cn/(gzdt|zcjd|jcyj)|jhs\.moa\.gov\.cn/|scs\.moa\.gov\.cn/tpxw|"
                      r"hzjjs\.moa\.gov\.cn/|scio\.gov\.cn/|www\.gov\.cn/")
 NUM = r"(\d+(?:\.\d+)?)"
 MONTH_RE = re.compile(r"(?<![\d年])(?:(20\d\d)年)?(\d{1,2})月(?:份|末|底)")
-SUBSET = re.compile(r"规模猪场|规模场|规模以上猪场|500头以上|5000头以上|定点监测村|散养|小散|养殖场户|省份|地区|"
-                    r"四川|湖南|河南|广西|广东|山东|江西|湖北|云南|福建|江苏|安徽|种猪场")
+PROVINCES = ("北京|天津|河北|山西|内蒙古|辽宁|吉林|黑龙江|上海|江苏|浙江|安徽|福建|江西|山东|河南|湖北|湖南|广东|广西|"
+             "海南|重庆|四川|贵州|云南|西藏|陕西|甘肃|青海|宁夏|新疆")
+SUBSET = re.compile(r"规模猪场|规模场|规模以上猪场|500头以上|5000头以上|定点监测村|散养|小散|养殖场户|省份|南方|北方|"
+                    r"种猪场|" + PROVINCES)
 FIELDS = [
     ("sow_wan", r"能繁母猪存栏(?:量)?(?:为|达到|达|是)?" + NUM + r"万头", 1, None),
     ("sow_mom_pct", r"能繁母猪存栏(?:量)?(?:" + NUM + r"万头)?[^。；，]{0,12}?环比(增长|增加|上升|下降|减少)" + NUM + "%", 3, 2),
@@ -205,55 +207,69 @@ FIELDS = [
 ]
 
 
-def extract_news(flat: str, pub: str):
-    """Yield dicts (month, field, value, evidence) from MOA press text.
+def _valid_months(clause: str):
+    """Month mentions that name the reporting month (not '自去年10月份以来', '比9月份', ...)."""
+    out = []
+    for mm in MONTH_RE.finditer(clause):
+        m = int(mm.group(2))
+        if not 1 <= m <= 12:
+            continue
+        pre = clause[max(0, mm.start() - 3):mm.start()]
+        post = clause[mm.end():mm.end() + 3]
+        if re.search(r"[自从比较于]|去年|上年|今年|前年|较去|与去", pre) or post.startswith(("以来", "的", "相比", "增")):
+            continue
+        out.append((mm.start(), mm.group(1), m))
+    return out
 
-    The month of a figure is the nearest "N月份/N月末" before it in the same sentence, else the single
-    month named in the previous sentence. Sentences about sub-samples (规模猪场, 散养户, single
-    provinces/regions) are skipped.
+
+def extract_news(flat: str, pub: str):
+    """Yield dicts (month, field, value, evidence, nbs) from MOA press text.
+
+    Sentences end at 。！？ and clauses at ；. A figure's month is the nearest valid month mention
+    at most 25 characters before it in the same clause; a clause without any month mention inherits
+    the single month of the previous clause of the same sentence. Sentences about sub-samples
+    (规模猪场, 散养户, provinces) are skipped; nbs=True when the sentence cites 国家统计局.
     """
     py, pm = int(pub[:4]), int(pub[5:7])
-    sents = [x for x in re.split(r"(?<=[。；！？])", flat) if x]
-    prev_month = None
 
     def ym(y, m):
         if y:
             return f"{int(y)}-{m:02d}"
-        yy = py if m <= pm else py - 1
-        return f"{yy}-{m:02d}"
-    for s in sents:
-        months = [(mm.start(), mm.group(1), int(mm.group(2))) for mm in MONTH_RE.finditer(s)
-                  if 1 <= int(mm.group(2)) <= 12]
-        this_prev = prev_month
-        distinct = {(y, m) for _, y, m in months}
-        prev_month = next(iter(distinct)) if len(distinct) == 1 else (None if months else prev_month)
-        if ("能繁母猪" not in s and "生猪存栏" not in s) or SUBSET.search(s):
+        return f"{py if m <= pm else py - 1}-{m:02d}"
+    for sent in re.split(r"(?<=[。！？])", flat):
+        if ("能繁母猪" not in sent and "生猪存栏" not in sent) or SUBSET.search(sent):
             continue
-        nbs = "国家统计局" in s
-        pair = re.search(r"能繁母猪存栏量?环比分别(增长|下降)" + NUM + r"%和" + NUM + r"%[，,]同比分别(增长|下降)"
-                         + NUM + r"%和" + NUM + "%", s)
-        if pair and len(months) >= 2:
-            sg1 = -1 if pair.group(1) == "下降" else 1
-            sg2 = -1 if pair.group(4) == "下降" else 1
-            for k, (_, y, m) in enumerate(months[:2]):
-                yield dict(month=ym(y, m), field="sow_mom_pct", value=sg1 * float(pair.group(2 + k)), evidence=s, nbs=nbs)
-                yield dict(month=ym(y, m), field="sow_yoy_pct", value=sg2 * float(pair.group(5 + k)), evidence=s, nbs=nbs)
-            continue
-        for fld, pat, gval, gsign in FIELDS:
-            for mt in re.finditer(pat, s):
-                before = [(y, m) for pos, y, m in months if pos < mt.start()]
-                if before:
-                    y, m = before[-1]
-                elif this_prev and not months:
-                    y, m = this_prev
-                else:
-                    continue
-                v = float(mt.group(gval))
-                if gsign is not None and mt.group(gsign) in ("下降", "减少"):
-                    v = -v
-                if fld == "hog_wan" and mt.group(2) == "亿":
-                    v *= 10000
-                yield dict(month=ym(y, m), field=fld, value=v, evidence=s, nbs=nbs)
+        nbs = "国家统计局" in sent
+        carry = None
+        for clause in re.split(r"(?<=；)", sent):
+            months = _valid_months(clause)
+            pair = re.search(r"能繁母猪存栏量?环比分别(增长|下降)" + NUM + r"%和" + NUM + r"%[，,]同比分别(增长|下降)"
+                             + NUM + r"%和" + NUM + "%", clause)
+            if pair and len(months) >= 2:
+                sg1 = -1 if pair.group(1) == "下降" else 1
+                sg2 = -1 if pair.group(4) == "下降" else 1
+                for k, (_, y, m) in enumerate(months[:2]):
+                    yield dict(month=ym(y, m), field="sow_mom_pct", value=sg1 * float(pair.group(2 + k)), evidence=sent, nbs=nbs)
+                    yield dict(month=ym(y, m), field="sow_yoy_pct", value=sg2 * float(pair.group(5 + k)), evidence=sent, nbs=nbs)
+                carry = None
+                continue
+            for fld, pat, gval, gsign in FIELDS:
+                for mt in re.finditer(pat, clause):
+                    before = [(y, m) for pos, y, m in months if pos < mt.start() and mt.start() - pos <= 25]
+                    if before:
+                        y, m = before[-1]
+                    elif not MONTH_RE.search(clause[:mt.start()]) and carry:
+                        y, m = carry
+                    else:
+                        continue
+                    v = float(mt.group(gval))
+                    if gsign is not None and mt.group(gsign) in ("下降", "减少"):
+                        v = -v
+                    if fld == "hog_wan" and mt.group(2) == "亿":
+                        v *= 10000
+                    yield dict(month=ym(y, m), field=fld, value=v, evidence=sent, nbs=nbs)
+            distinct = {(y, m) for _, y, m in months}
+            carry = next(iter(distinct)) if len(distinct) == 1 else (None if months else carry)
 
 
 def news_months():
