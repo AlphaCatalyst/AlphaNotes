@@ -7,7 +7,7 @@
 | 主题 | 标的 | 报告 | 交互工具 | 数据截至 |
 | --- | --- | --- | --- | --- |
 | 猪周期估值推演的辩证复核 | 牧原 002714 · 东瑞 001201 · 神农 605296 | [analysis.md](reports/hog-cycle/analysis.md) · [视频交叉比对](reports/hog-cycle/video-crosscheck.md) | [估值沙盘](reports/hog-cycle/sandbox.html)（含东瑞模式与广东溢价滑杆） | 2026-10-03 |
-| 非瘟超级周期复盘 × 2027 情景与上市猪企筛选 | 牧原 002714 · 温氏 300498 · 东瑞 001201 等 17 家 A 股，德康、中粮家佳康单列 | [analysis.html](reports/hog-cycle-asf-2027/analysis.html) · [目录说明](reports/hog-cycle-asf-2027/README.md) | [2027 情景模型](reports/hog-cycle-asf-2027/model.xlsx)（Excel，可切换价格路径与情景） | 2026-10-08 |
+| 非瘟超级周期复盘 × 2027 情景与上市猪企筛选 | 牧原 002714 · 温氏 300498 · 东瑞 001201 等 17 家 A 股，德康、中粮家佳康单列 | [analysis.html](reports/hog-cycle-asf-2027/analysis.html) · [目录说明](reports/hog-cycle-asf-2027/README.md) · Issue 答复：[四川去化与补贴](reports/hog-cycle-asf-2027/issues/01-sichuan-destocking.md)、[东瑞低市净率](reports/hog-cycle-asf-2027/issues/02-dongrui-pb.md) | [2027 情景模型](reports/hog-cycle-asf-2027/model.xlsx)（Excel，可切换价格路径与情景） | 2026-10-08 |
 
 每个主题目录下至少有三个文件：`source.md` 是原始推演记录，`analysis.md` 是核实与复核后的报告，`sandbox.html` 是可调参数的交互工具。保留 `source.md` 是为了让结论的演化过程可追溯——包括被推翻的部分。
 
