@@ -21,8 +21,9 @@
 | [#1 四川产能去化是否慢于全国，地方补贴起了多大作用](https://github.com/AlphaCatalyst/AlphaNotes/issues/1) | [issues/01-sichuan-destocking.md](issues/01-sichuan-destocking.md) | 本轮调减窗口里四川确实慢：2025Q3 以来四川能繁母猪 −2.6%，全国扣除四川 −6.7%；从 2023Q2 算起两者接近。50 元补贴出台晚、金额小，不是主因。四川多保留的母猪约占全国 0.4%，对 2027 年全国猪价的影响约 1%—4% |
 | [#2 东瑞的低市净率是否意味着被低估](https://github.com/AlphaCatalyst/AlphaNotes/issues/2) | [issues/02-dongrui-pb.md](issues/02-dongrui-pb.md) | 低市净率只在同行横比时成立；现价隐含 2027 年全国猪价约 13.9 元，与牧原相当。净资产主要是租地上的猪舍，不是硬底。企业价值与重置成本大致相当，回报来自 2027 年价格和降本两个期权 |
 | [#3 四位雪球作者近半年的猪周期观点：周期演绎、预期差、时间节点与相关标的](https://github.com/AlphaCatalyst/AlphaNotes/issues/3) | [issues/03-xueqiu-authors.md](issues/03-xueqiu-authors.md) | 四人都认为去化在加速、2027 年前后转强，牧原是首选或基准，但依据多来自同一批官方数据、第三方数据和政策传闻，不是独立证据。最大分歧是 2027 年价格：豆区约 16 元，期货约 12.2 元，当前估值隐含约 13—16 元，差别主要来自效率和滞后假设。第一个检验点是 10-19 统计局的三季度能繁数据 |
+| [#4 广东猪价溢价是长期优势还是阶段现象，东瑞能兑现多少](https://github.com/AlphaCatalyst/AlphaNotes/issues/4) | [issues/04-guangdong-premium.md](issues/04-guangdong-premium.md) | 同源口径下广东常态只比全国高 0.3 元（非瘟前）至 0.6—0.8 元（2023 年以来，调运限制仍在）；"2022、2024 年贵 2 元以上"不成立。非瘟期以外价差与全国价几乎无关，当前也不算偏低。东瑞内销拿不全广东溢价，主要靠供港，且被扩产稀释。全国 18 元时东瑞溢价约 0.64—1.03 元/公斤，Issue #2 的 7.8%（1.40 元）偏高，年赚 10 亿约需全国 17.1—17.5 元；逻辑不依赖溢价扩大，关键是成本 |
 
-#1、#2 的股价截至 2026-10-09 收盘，#3 截至 2026-10-08 收盘。数据和脚本在 `data/processed/issues/`、`scripts/issues/`、`research/sichuan_destocking/`、`research/replacement_cost/`、`research/xueqiu_authors/`。
+#1、#2 的股价截至 2026-10-09 收盘，#3 截至 2026-10-08 收盘；#4 的分省价格截至 2026-10-08。数据和脚本在 `data/processed/issues/`、`scripts/issues/`、`research/sichuan_destocking/`、`research/replacement_cost/`、`research/xueqiu_authors/`。
 
 ## 文件
 
@@ -38,17 +39,17 @@
 
 ## 未公开的数据
 
-以下文件属于第三方原始序列，只存本地、不随仓库公开，运行抓取脚本可重新生成：股价与指数日线（`stock_daily.csv`、`index_daily.csv`）、大商所生猪期货具体合约日线（`futures_lh_daily.csv`、`fut_main_mapped.csv`）、新牧网现货价格（`nxin_*.csv`）、月度销售公告全文（`sales_ann_text.csv`）。原始下载缓存 `data/raw/`（约 3 GB）同样只存本地。各子研究的原文缓存和抓取脚本（`research/*/_raw/`、`research/*/_work/`）也只存本地；CSV 里的摘录已逐字核验，可以按链接回查原文。雪球帖子的全文和配图同样只存本地，公开的只有索引、摘要和不超过 40 字的短引文。作为起点的旧报告《非洲猪瘟猪周期复盘》未收录。
+以下文件属于第三方原始序列，只存本地、不随仓库公开，运行抓取脚本可重新生成：股价与指数日线（`stock_daily.csv`、`index_daily.csv`）、大商所生猪期货具体合约日线（`futures_lh_daily.csv`、`fut_main_mapped.csv`）、新牧网现货价格（`nxin_*.csv`）、中国养猪网分省报价（`zhuwang_*.csv`）、月度销售公告全文（`sales_ann_text.csv`）。原始下载缓存 `data/raw/`（约 3 GB）同样只存本地。各子研究的原文缓存和抓取脚本（`research/*/_raw/`、`research/*/_work/`）也只存本地；CSV 里的摘录已逐字核验，可以按链接回查原文。雪球帖子的全文和配图同样只存本地，公开的只有索引、摘要和不超过 40 字的短引文。作为起点的旧报告《非洲猪瘟猪周期复盘》未收录。
 
 ## 重跑顺序
 
 只基于仓库内的数据无法完整重跑，需要先执行第 1 步生成上面的本地数据。
 
-1. 抓取与清洗：`fetch_stocks.py` → `build_stock_daily.py`；`fetch_futures.py`；`industry/run_all.sh`（新牧网、农业农村部、统计局、广东）→ `process_spot.py`；`fetch_fin.py` → `build_fin.py`；`fetch_sales_ann.py` → `parse_sales.py`；`policy_fetch.py` → `build_policy_timeline.py`、`build_asf_monthly.py`
+1. 抓取与清洗：`fetch_stocks.py` → `build_stock_daily.py`；`fetch_futures.py`；`industry/run_all.sh`（新牧网、农业农村部、统计局、广东、中国养猪网）→ `process_spot.py`；`fetch_fin.py` → `build_fin.py`；`fetch_sales_ann.py` → `parse_sales.py`；`policy_fetch.py` → `build_policy_timeline.py`、`build_asf_monthly.py`
 2. 历史分析：`analyze_history.py`（窗口收益、峰值）→ `analyze_two_phase.py`（两阶段检验、计划兑现）→ `analyze_leadlag.py`、`analyze_futures.py`、`analyze_expansion.py`
 3. 当前筛选与模型：`build_screen.py` → `model_2027.py` → `analyze_current.py`（顶点倍数、双顶、2026-06-25 以来的反弹面板）
 4. 输出：`make_charts.py`（写入 `charts/`）→ `build_excel.py`（重新调用模型，写入 `model.xlsx`）→ `build_report.py`（写入 `analysis.html`）
-5. Issue 答复：`issues/dongrui_pb.py`（另取 2026-10-09 收盘行情快照）、`issues/sichuan.py`、`issues/xueqiu_checks.py`，结果写入 `data/processed/issues/`；`issues/xueqiu_index.py` 需要本地的雪球抓取库，生成 `research/xueqiu_authors/articles.csv`
+5. Issue 答复：`issues/dongrui_pb.py`（另取 2026-10-09 收盘行情快照）、`issues/sichuan.py`、`issues/xueqiu_checks.py`、`issues/gd_premium.py`（在 `dongrui_pb.py` 之后运行），结果写入 `data/processed/issues/`；`issues/xueqiu_index.py` 需要本地的雪球抓取库，生成 `research/xueqiu_authors/articles.csv`
 
 依赖：Python 3、pandas、numpy、matplotlib、openpyxl；Excel 公式核对用 `formulas`。
 

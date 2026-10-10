@@ -9,7 +9,7 @@ reports/**/transcripts/*.md
 reports/**/transcripts/*.meta.json
 !reports/**/transcripts/README.md
 
-# 第三方原始行情序列（股价与指数日线、期货日线、新牧网价格、公告全文）只保留在本地：
+# 第三方原始行情序列（股价与指数日线、期货日线、新牧网与中国养猪网价格、公告全文）只保留在本地：
 # 整段复制他人数据库不适合公开，且可由 scripts/ 里的抓取脚本重新生成。
 # 派生结果、政府统计和公告摘录照常提交。
 reports/hog-cycle-asf-2027/data/raw/
@@ -22,6 +22,7 @@ reports/hog-cycle-asf-2027/data/processed/index_daily.csv
 reports/hog-cycle-asf-2027/data/processed/futures_lh_daily.csv
 reports/hog-cycle-asf-2027/data/processed/fut_main_mapped.csv
 reports/hog-cycle-asf-2027/data/processed/nxin_*.csv
+reports/hog-cycle-asf-2027/data/processed/zhuwang_*.csv
 reports/hog-cycle-asf-2027/data/processed/sales_ann_text.csv
 reports/hog-cycle-asf-2027/data/processed/industry_checks/monthly_price_crosscheck.csv
 __pycache__/
