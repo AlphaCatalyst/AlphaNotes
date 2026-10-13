@@ -19,6 +19,7 @@ reports/hog-cycle-asf-2027/research/*/_raw/
 reports/hog-cycle-asf-2027/research/*/_work/
 reports/hog-cycle-asf-2027/data/processed/stock_daily.csv
 reports/hog-cycle-asf-2027/data/processed/index_daily.csv
+reports/hog-cycle-asf-2027/data/processed/csi_index_daily.csv
 reports/hog-cycle-asf-2027/data/processed/futures_lh_daily.csv
 reports/hog-cycle-asf-2027/data/processed/fut_main_mapped.csv
 reports/hog-cycle-asf-2027/data/processed/nxin_*.csv

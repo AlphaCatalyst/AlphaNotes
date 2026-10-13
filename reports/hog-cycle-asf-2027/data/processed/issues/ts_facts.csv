@@ -1,0 +1,39 @@
+key,value
+spot_trough,2026-04-10 8.8800
+spot_high_after,2026-07-10 11.3300
+spot_last,2026-10-16 10.0881
+ew_since_ew_trough,0.1058
+ew_xs_since_ew_trough,0.2203
+lead_xs_since_ew_trough,0.2718
+small_xs_since_ew_trough,0.2131
+lead_since_ew_trough,0.1779
+small_since_ew_trough,0.0961
+ew_trough,2026-06-26
+spot_chg_since_sf,-0.1100
+seasonal_median_chg_since_sf,0.0607
+surprise_since_sf,-0.1755
+spot_chg_since_spot_trough,0.1361
+seasonal_median_chg_since_spot_trough,0.1877
+surprise_since_spot_trough,-0.0444
+spot_chg_since_summer_high,-0.1096
+seasonal_median_chg_since_summer_high,0.0677
+surprise_since_summer_high,-0.1816
+spot_chg_since_ew_trough,0.0664
+seasonal_median_chg_since_ew_trough,0.1084
+surprise_since_ew_trough,-0.0386
+LH2611_since_stock_trough,-0.2098
+LH2611_last,10210.0000
+LH2701_since_stock_trough,-0.2171
+LH2701_last,10605.0000
+LH2705_since_stock_trough,-0.1944
+LH2705_last,11520.0000
+LH2709_since_stock_trough,nan
+LH2709_last,13190.0000
+LH0_trough,2026-04-13 9055.0000
+r_nxin_over_moa_weekly,0.9988
+n_overlap_weekly,24
+r_moa_weekly_over_monthly,1.0006
+n_overlap_monthly,43
+nxin_daily_shift,-0.0320
+last_weekly_nxin,2026-09-25
+last_daily_nxin,2026-10-12
