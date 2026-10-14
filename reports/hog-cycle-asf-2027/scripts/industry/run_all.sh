@@ -6,6 +6,7 @@ cd "$(dirname "$0")"
 python3 -u nbs_index.py
 python3 -u nbs_quarterly.py
 python3 -u nbs_tenday.py            # 2018-2022; `python3 nbs_tenday.py 2016 2017` etc. for other years
+python3 -u nbs_tenday.py 2025 2026  # Issue #6
 python3 -u moa_weekly_prices.py
 python3 -u moa_hist_prices.py       # 农业部 2003-2015 集贸市场生猪价格月报/周报 (Issue #5)
 python3 -u moa_sows_monthly.py

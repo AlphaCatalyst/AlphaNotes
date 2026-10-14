@@ -127,6 +127,7 @@ code,sec_name,month_key,months_covered,total_heads,commodity_heads,commodity_hea
 000702,正虹科技,2026-06,1,1.02,0.54,,0.48,,,0.07574199999999999,9.39,,,,,,,lead,True,2026-07-08,2026年6月生猪销售简报,https://static.cninfo.com.cn/finalpage/2026-07-08/1225412754.PDF
 000702,正虹科技,2026-07,1,1.11,0.28,,0.83,,,0.05404,10.57,,,,,,,lead,True,2026-08-07,2026年7月生猪销售简报,https://static.cninfo.com.cn/finalpage/2026-08-07/1225461857.PDF
 000702,正虹科技,2026-08,1,1.57,0.54,,1.03,,,0.0912,10.57,,,,,,,lead,True,2026-09-08,2026年8月生猪销售简报,https://static.cninfo.com.cn/finalpage/2026-09-08/1225550600.PDF
+000702,正虹科技,2026-09,1,0.95,0.45,,0.5,,,0.073885,10.62,,,,,,,lead,True,2026-10-10,2026年9月生猪销售简报,https://static.cninfo.com.cn/finalpage/2026-10-10/1225599282.PDF
 000735,罗 牛 山,2017-12,1,1.23,,,,,,0.182597,,,,,,,,lead,False,2018-01-17,2017年12月畜牧行业销售简报,https://static.cninfo.com.cn/finalpage/2018-01-17/1204336074.PDF
 000735,罗 牛 山,2018-01,1,2.64,,,,,,0.428863,,,,,,,,lead,False,2018-02-27,2018年1月畜牧行业销售简报,https://static.cninfo.com.cn/finalpage/2018-02-27/1204431668.PDF
 000735,罗 牛 山,2018-02,1,1.13,,,,,,0.147323,,,,,,,,lead,False,2018-03-21,2018年2月畜牧行业销售简报,https://static.cninfo.com.cn/finalpage/2018-03-21/1204495140.PDF
@@ -232,6 +233,7 @@ code,sec_name,month_key,months_covered,total_heads,commodity_heads,commodity_hea
 000735,罗 牛 山,2026-06,1,8.31,,,,,,0.782871,,,,,,,,lead,False,2026-07-11,2026年6月畜牧行业销售简报,https://static.cninfo.com.cn/finalpage/2026-07-11/1225418378.PDF
 000735,罗 牛 山,2026-07,1,6.99,,,,,,0.894494,,,,,,,,lead,False,2026-08-11,2026年7月畜牧行业销售简报,https://static.cninfo.com.cn/finalpage/2026-08-11/1225465440.PDF
 000735,罗 牛 山,2026-08,1,7.17,,,,,,0.937702,,,,,,,,lead,False,2026-09-11,2026年8月畜牧行业销售简报,https://static.cninfo.com.cn/finalpage/2026-09-11/1225556726.PDF
+000735,罗 牛 山,2026-09,1,8.23,,,,,,0.9190010000000001,,,,,,,,lead,False,2026-10-13,2026年9月畜牧行业销售简报,https://static.cninfo.com.cn/finalpage/2026-10-13/1225600663.PDF
 000876,新 希 望,2019-01,1,29.31,234.25,,19.2,1.93,,4.23,13.12,,,,,,,table,False,2020-02-08,2018年度及2019年1月生猪销售情况简报的自愿性信息披露公告,https://static.cninfo.com.cn/finalpage/2020-02-08/1207298148.PDF
 000876,新 希 望,2019-02,1,17.63,,,,,,2.23,11.84,,,,,,,lead,False,2019-03-09,2019年2月生猪销售情况简报的自愿性信息披露公告,https://static.cninfo.com.cn/finalpage/2019-03-09/1205888316.PDF
 000876,新 希 望,2019-03,1,21.32,,,,,,3.47,,,,,,,,lead,False,2019-04-10,2019年3月生猪销售情况简报的自愿性信息披露公告,https://static.cninfo.com.cn/finalpage/2019-04-10/1206001872.PDF
@@ -324,6 +326,7 @@ code,sec_name,month_key,months_covered,total_heads,commodity_heads,commodity_hea
 000876,新 希 望,2026-06,1,125.44,125.44,,8.11,3.09,,13.84,9.35,,,,,,主句为商品猪；仔猪种猪另列,lead,False,2026-07-08,2026年6月销售情况简报,https://static.cninfo.com.cn/finalpage/2026-07-08/1225412726.PDF
 000876,新 希 望,2026-07,1,122.56,122.56,,4.74,3.69,,15.05,10.42,,,,,,主句为商品猪；仔猪种猪另列,lead,False,2026-08-06,2026年7月销售情况简报,https://static.cninfo.com.cn/finalpage/2026-08-06/1225458878.PDF
 000876,新 希 望,2026-08,1,120.61,120.61,,7.42,5.19,,15.05,10.46,,,,,,主句为商品猪；仔猪种猪另列,lead,False,2026-09-08,2026年8月销售情况简报,https://static.cninfo.com.cn/finalpage/2026-09-08/1225550881.PDF
+000876,新 希 望,2026-09,1,113.97,113.97,,7.21,4.32,,13.82,10.34,,,,,,主句为商品猪；仔猪种猪另列,lead,False,2026-10-14,2026年9月销售情况简报,https://static.cninfo.com.cn/finalpage/2026-10-14/1225602805.PDF
 001201,东瑞股份,2021-04,1,2.44,2.05,,0.31,0.01,,,34.38,,1.75,0.3,36.08,23.87,,lead,False,2021-05-10,2021年4月份生猪销售简报,https://static.cninfo.com.cn/finalpage/2021-05-10/1209944322.PDF
 001201,东瑞股份,2021-05,1,2.48,1.78,,0.63,0.01,,,29.99,,1.58,0.2,31.34,19.29,,lead,False,2021-06-03,2021年5月份生猪销售简报,https://static.cninfo.com.cn/finalpage/2021-06-03/1210157589.PDF
 001201,东瑞股份,2021-06,1,2.52,1.85,,0.62,,,,25.67,,1.6,0.25,27.32,14.85,,lead,False,2021-07-06,2021年6月份生猪销售简报,https://static.cninfo.com.cn/finalpage/2021-07-06/1210417909.PDF
@@ -389,6 +392,7 @@ code,sec_name,month_key,months_covered,total_heads,commodity_heads,commodity_hea
 001201,东瑞股份,2026-06,1,12.54,,,,,,1.52,10.82,,,,,,,lead,False,2026-07-08,2026年6月份生猪销售简报,https://static.cninfo.com.cn/finalpage/2026-07-08/1225413555.PDF
 001201,东瑞股份,2026-07,1,13.08,,,,,,1.6,12.81,,,,,,,lead,False,2026-08-08,2026年7月份生猪销售简报,https://static.cninfo.com.cn/finalpage/2026-08-08/1225463903.PDF
 001201,东瑞股份,2026-08,1,11.4,,,,,,1.64,12.16,,,,,,,lead,False,2026-09-08,2026年8月份生猪销售简报,https://static.cninfo.com.cn/finalpage/2026-09-08/1225550882.PDF
+001201,东瑞股份,2026-09,1,12.11,,,,,,1.77,11.94,,,,,,,lead,False,2026-10-10,2026年9月份生猪销售简报,https://static.cninfo.com.cn/finalpage/2026-10-10/1225598336.PDF
 002100,天康生物,2017-12,1,3.88,,,,,,0.58,,,,,,,,lead,False,2018-01-09,关于2017年12月份生猪销售简报,https://static.cninfo.com.cn/finalpage/2018-01-09/1204311678.PDF
 002100,天康生物,2018-01,1,6.04,,,,,,0.63,,,,,,,,lead,False,2018-02-07,关于2018年1月份生猪销售简报,https://static.cninfo.com.cn/finalpage/2018-02-07/1204399380.PDF
 002100,天康生物,2018-02,1,5.3,,,,,,0.48,,,,,,,,lead,False,2018-03-08,关于2018年2月份生猪销售简报,https://static.cninfo.com.cn/finalpage/2018-03-08/1204457903.PDF
@@ -494,6 +498,7 @@ code,sec_name,month_key,months_covered,total_heads,commodity_heads,commodity_hea
 002100,天康生物,2026-06,1,39.96,,,,,,3.8,8.8,,,,,,,lead,False,2026-07-10,关于2026年6月份生猪销售简报,https://static.cninfo.com.cn/finalpage/2026-07-10/1225417309.PDF
 002100,天康生物,2026-07,1,39.61,,,,,,3.93,9.68,,,,,,,lead,False,2026-08-08,2026年7月份生猪销售简报,https://static.cninfo.com.cn/finalpage/2026-08-08/1225464504.PDF
 002100,天康生物,2026-08,1,41.11,,,,,,4.17,9.61,,,,,,,lead,False,2026-09-10,2026年8月份生猪销售简报,https://static.cninfo.com.cn/finalpage/2026-09-10/1225554985.PDF
+002100,天康生物,2026-09,1,36.12,,,,,,4.07,9.79,,,,,,,lead,False,2026-10-10,2026年9月份生猪销售简报,https://static.cninfo.com.cn/finalpage/2026-10-10/1225600163.PDF
 002124,天邦股份,2017-12,1,,,,,,,,,,,,,,控股子公司口径；总数含仔猪,lead,False,2018-01-04,2017年12月份商品猪销售情况简报,https://static.cninfo.com.cn/finalpage/2018-01-04/1204302289.PDF
 002124,天邦股份,2018-01,1,10.29,,,,,,1.9372169999999997,,,,,,,控股子公司口径；总数含仔猪,lead,False,2018-02-06,2018年1月份商品猪销售及能繁母猪存栏情况简报,https://static.cninfo.com.cn/finalpage/2018-02-06/1204391693.PDF
 002124,天邦股份,2018-02,1,13.38,,,,,,1.9650580000000002,,,,,,,控股子公司口径；总数含仔猪,lead,False,2018-03-07,2018年2月份商品猪销售情况简报,https://static.cninfo.com.cn/finalpage/2018-03-07/1204455353.PDF
@@ -598,6 +603,7 @@ code,sec_name,month_key,months_covered,total_heads,commodity_heads,commodity_hea
 002124,天邦食品,2026-06,1,67.41,42.019999999999996,,25.39,,16.9261,4.914125,9.17,,,,,,控股子公司口径；总数含仔猪,lead,False,2026-07-09,2026年6月份商品猪销售情况简报,https://static.cninfo.com.cn/finalpage/2026-07-09/1225414929.PDF
 002124,天邦食品,2026-07,1,70.62,41.370000000000005,,29.25,,17.6387,5.167765,10.1,,,,,,控股子公司口径；总数含仔猪,lead,False,2026-08-07,2026年7月份商品猪销售情况简报,https://static.cninfo.com.cn/finalpage/2026-08-07/1225461214.PDF
 002124,天邦食品,2026-08,1,62.25,41.53,,20.72,,17.8341,4.9261919999999995,10.14,,,,,,控股子公司口径；总数含仔猪,lead,False,2026-09-09,2026年8月份商品猪销售情况简报,https://static.cninfo.com.cn/finalpage/2026-09-09/1225553022.PDF
+002124,天邦食品,2026-09,1,50.34,41.120000000000005,,9.22,,19.6694,4.619717,10.03,,,,,,控股子公司口径；总数含仔猪,lead,False,2026-10-12,2026年9月份商品猪销售情况简报,https://static.cninfo.com.cn/finalpage/2026-10-12/1225600459.PDF
 002157,正邦科技,2017-12,1,40.1,,,,,,6.17,,,,,,,,lead,False,2018-01-06,关于2017年12月份生猪销售情况简报,https://static.cninfo.com.cn/finalpage/2018-01-06/1204309438.PDF
 002157,正邦科技,2018-01,1,36.45,,,,,,6.25,,,,,,,,lead,False,2018-02-07,关于2018年1月份生猪销售情况简报,https://static.cninfo.com.cn/finalpage/2018-02-07/1204400234.PDF
 002157,正邦科技,2018-02,1,30.44,,,,,,4.48,,,,,,,,lead,False,2018-03-10,关于2018年2月份生猪销售情况简报,https://static.cninfo.com.cn/finalpage/2018-03-10/1204466185.PDF
@@ -703,6 +709,7 @@ code,sec_name,month_key,months_covered,total_heads,commodity_heads,commodity_hea
 002157,正邦科技,2026-06,1,95.27,,,,,,6.25,9.68,,,,,,,lead,False,2026-07-09,关于2026年6月份生猪销售情况简报,https://static.cninfo.com.cn/finalpage/2026-07-09/1225414889.PDF
 002157,正邦科技,2026-07,1,81.76,,,,,,5.87,10.78,,,,,,,lead,False,2026-08-08,关于2026年7月份生猪销售情况简报,https://static.cninfo.com.cn/finalpage/2026-08-08/1225463075.PDF
 002157,正邦科技,2026-08,1,86.79,,,,,,5.94,11.14,,,,,,,lead,False,2026-09-09,关于2026年8月份生猪销售情况简报,https://static.cninfo.com.cn/finalpage/2026-09-09/1225553780.PDF
+002157,正邦科技,2026-09,1,84.23,,,,,,5.41,10.49,,,,,,,lead,False,2026-10-10,关于2026年9月份生猪销售情况简报,https://static.cninfo.com.cn/finalpage/2026-10-10/1225598573.PDF
 002385,大北农,2019-05,1,14.03,,,,,,2.23,,,,,,,,lead,False,2019-06-06,2019年5月份生猪销售情况简报,https://static.cninfo.com.cn/finalpage/2019-06-06/1206336940.PDF
 002385,大北农,2019-06,1,13.4,,,,,,2.09,,,,,,,,lead,False,2019-07-04,2019年6月份生猪销售情况简报,https://static.cninfo.com.cn/finalpage/2019-07-04/1206424776.PDF
 002385,大北农,2019-07,1,15.0,,,,,,2.54,,,,,,,,lead,False,2019-08-06,2019年7月份生猪销售情况简报,https://static.cninfo.com.cn/finalpage/2019-08-06/1206498980.PDF
@@ -791,6 +798,7 @@ code,sec_name,month_key,months_covered,total_heads,commodity_heads,commodity_hea
 002385,大北农,2026-06,1,31.34,31.34,,,,,3.66,9.44,,,,,,仅商品肥猪,lead,False,2026-07-11,2026年6月份商品肥猪销售情况简报,https://static.cninfo.com.cn/finalpage/2026-07-11/1225418498.PDF
 002385,大北农,2026-07,1,23.89,23.89,,,,,3.19,11.04,,,,,,仅商品肥猪,lead,False,2026-08-11,2026年7月份商品肥猪销售情况简报,https://static.cninfo.com.cn/finalpage/2026-08-11/1225466076.PDF
 002385,大北农,2026-08,1,29.86,29.86,,,,,4.01,10.95,,,,,,仅商品肥猪,lead,False,2026-09-11,2026年8月份商品肥猪销售情况简报,https://static.cninfo.com.cn/finalpage/2026-09-11/1225556812.PDF
+002385,大北农,2026-09,1,25.91,25.91,,,,,3.54,10.72,,,,,,仅商品肥猪,lead,False,2026-10-13,2026年9月份商品肥猪销售情况简报,https://static.cninfo.com.cn/finalpage/2026-10-13/1225600768.PDF
 002477,雏鹰农牧,2017-12,1,30.39,15.62,,14.35,,,3.56,22.52,,,,,,,lead,False,2018-01-13,2017年12月份销售情况简报,https://static.cninfo.com.cn/finalpage/2018-01-13/1204327435.PDF
 002477,雏鹰农牧,2018-02,2,27.11,17.32,,9.62,,,3.57,22.18,,,,,,,lead,False,2018-03-08,2018年1-2月份销售情况简报,https://static.cninfo.com.cn/finalpage/2018-03-08/1204458782.PDF
 002477,雏鹰农牧,2018-03,1,29.66,,,9.51,,,3.34,20.06,,,,,,,lead,False,2018-04-10,2018年3月份销售情况简报,https://static.cninfo.com.cn/finalpage/2018-04-10/1204595636.PDF
@@ -914,6 +922,7 @@ code,sec_name,month_key,months_covered,total_heads,commodity_heads,commodity_hea
 002548,金新农,2026-06,1,10.15,3.22,,6.94,0.19,,0.502053,9.96,,,,,,,lead,False,2026-07-08,2026年06月生猪销售简报,https://static.cninfo.com.cn/finalpage/2026-07-08/1225414204.PDF
 002548,金新农,2026-07,1,10.71,4.31,,6.39,0.01,,0.7368060000000001,11.94,,,,,,,lead,False,2026-08-08,2026年07月生猪销售简报,https://static.cninfo.com.cn/finalpage/2026-08-08/1225464069.PDF
 002548,金新农,2026-08,1,14.21,5.68,,8.53,,,0.949591,11.64,,,,,,,lead,False,2026-09-08,2026年08月生猪销售简报,https://static.cninfo.com.cn/finalpage/2026-09-08/1225551395.PDF
+002548,金新农,2026-09,1,10.82,2.83,,7.99,,,0.5302319999999999,11.87,,,,,,,lead,False,2026-10-10,2026年09月生猪销售简报,https://static.cninfo.com.cn/finalpage/2026-10-10/1225598572.PDF
 002567,唐人神,2019-02,2,18.2,,,,,,1.6118,,,,,,,,lead,False,2019-03-07,2019年1-2月生猪销售简报,https://static.cninfo.com.cn/finalpage/2019-03-07/1205881293.PDF
 002567,唐人神,2019-03,1,9.2,,,,,,0.8985,,,,,,,,lead,False,2019-04-10,2019年3月生猪销售简报,https://static.cninfo.com.cn/finalpage/2019-04-10/1206001384.PDF
 002567,唐人神,2019-04,1,8.37,,,,,,0.9928,,,,,,,,lead,False,2019-05-10,2019年4月生猪销售简报,https://static.cninfo.com.cn/finalpage/2019-05-10/1206256390.PDF
@@ -1005,6 +1014,7 @@ code,sec_name,month_key,months_covered,total_heads,commodity_heads,commodity_hea
 002567,唐人神,2026-06,1,35.82,22.89,,12.94,,,3.0155119999999997,,,,,,,,lead,False,2026-07-09,2026年6月生猪销售简报,https://static.cninfo.com.cn/finalpage/2026-07-09/1225415005.PDF
 002567,唐人神,2026-07,1,40.23,20.36,,19.87,,,3.112829,,,,,,,,lead,False,2026-08-08,2026年7月生猪销售简报,https://static.cninfo.com.cn/finalpage/2026-08-08/1225463489.PDF
 002567,唐人神,2026-08,1,49.23,27.03,,22.19,,,4.099181,,,,,,,,lead,False,2026-09-11,2026年8月生猪销售简报,https://static.cninfo.com.cn/finalpage/2026-09-11/1225557836.PDF
+002567,唐人神,2026-09,1,47.53,24.39,,23.13,,,3.819775,,,,,,,,lead,False,2026-10-13,2026年9月生猪销售简报,https://static.cninfo.com.cn/finalpage/2026-10-13/1225601396.PDF
 002714,牧原股份,2016-12,1,47.2,,,,,,8.11,16.95,,,,,,,table,False,2018-01-06,,https://static.cninfo.com.cn/finalpage/2018-01-06/1204309932.PDF
 002714,牧原股份,2017-03,1,43.4,,,,,,6.7,15.77,,,,,,,table,False,2018-04-09,,https://static.cninfo.com.cn/finalpage/2018-04-09/1204589913.PDF
 002714,牧原股份,2017-04,1,40.0,,,,,,6.27,15.02,,,,,,,table,False,2018-05-05,,https://static.cninfo.com.cn/finalpage/2018-05-05/1204910668.PDF
@@ -1112,6 +1122,7 @@ code,sec_name,month_key,months_covered,total_heads,commodity_heads,commodity_hea
 002714,牧原股份,2026-06,1,622.7,622.7,,,,,75.0,9.69,,,,,,仅披露商品猪,lead,False,2026-07-07,2026年6月份销售简报,https://static.cninfo.com.cn/finalpage/2026-07-07/1225411958.PDF
 002714,牧原股份,2026-07,1,666.1,666.1,,,,,88.97,10.64,,,,,,仅披露商品猪,lead,False,2026-08-06,2026年7月份销售简报,https://static.cninfo.com.cn/finalpage/2026-08-06/1225460373.PDF
 002714,牧原股份,2026-08,1,703.0,703.0,,,,,92.54,10.3,,,,,,仅披露商品猪,lead,False,2026-09-08,2026年8月份销售简报,https://static.cninfo.com.cn/finalpage/2026-09-08/1225551030.PDF
+002714,牧原股份,2026-09,1,642.3,642.3,,,,,85.2,10.36,,,,,,仅披露商品猪,lead,False,2026-10-12,2026年9月份销售简报,https://static.cninfo.com.cn/finalpage/2026-10-12/1225600460.PDF
 002840,华统股份,2021-08,1,0.5114,,,,,,0.104781,,,,,,,,lead,False,2021-09-15,2021年8月畜禽销售情况简报,https://static.cninfo.com.cn/finalpage/2021-09-15/1211053386.PDF
 002840,华统股份,2021-09,1,0.4834,,,,,,0.069254,,,,,,,,lead,False,2021-10-16,2021年9月畜禽销售情况简报,https://static.cninfo.com.cn/finalpage/2021-10-16/1211288752.PDF
 002840,华统股份,2021-10,1,0.8103,,,,,,0.12302,,,,,,,,lead,False,2021-11-17,2021年10月畜禽销售情况简报,https://static.cninfo.com.cn/finalpage/2021-11-17/1211601048.PDF
@@ -1173,6 +1184,7 @@ code,sec_name,month_key,months_covered,total_heads,commodity_heads,commodity_hea
 002840,华统股份,2026-06,1,18.2005,,,0.5566,,,2.146673,9.58,,,,,,,lead,False,2026-07-10,2026年6月畜禽销售情况简报,https://static.cninfo.com.cn/finalpage/2026-07-10/1225416973.PDF
 002840,华统股份,2026-07,1,16.9769,,,0.4982,,,2.245975,10.65,,,,,,,lead,False,2026-08-14,2026年7月畜禽销售情况简报,https://static.cninfo.com.cn/finalpage/2026-08-14/1225471237.PDF
 002840,华统股份,2026-08,1,16.5221,,,0.2838,,,2.2036919999999998,10.74,,,,,,,lead,False,2026-09-12,2026年8月畜禽销售情况简报,https://static.cninfo.com.cn/finalpage/2026-09-12/1225560919.PDF
+002840,华统股份,2026-09,1,16.1461,,,0.297,,,2.133105,10.63,,,,,,,lead,False,2026-10-15,2026年9月畜禽销售情况简报,https://static.cninfo.com.cn/finalpage/2026-10-15/1225604516.PDF
 300498,温氏股份,2017-12,1,190.1,,,,,,33.63,14.95,,,,,,标题含年度汇总,lead,False,2018-01-08,2017年12月及2017年度商品肉猪销售情况简报,https://static.cninfo.com.cn/finalpage/2018-01-08/1204310698.PDF
 300498,温氏股份,2018-01,1,178.95,,,,,,31.45,15.05,,,,,,,lead,False,2018-02-06,2018年1月份商品肉猪销售情况简报,https://static.cninfo.com.cn/finalpage/2018-02-06/1204394171.PDF
 300498,温氏股份,2018-02,1,122.7,,,,,,19.44,13.46,,,,,,,lead,False,2018-03-05,2018年2月份商品肉猪销售情况简报,https://static.cninfo.com.cn/finalpage/2018-03-05/1204451994.PDF
@@ -1290,12 +1302,13 @@ code,sec_name,month_key,months_covered,total_heads,commodity_heads,commodity_hea
 600975,新五丰,2025-12,1,68.14,40.2,,,,,,11.17,,,,,,,ytd_table,,2026-01-10,湖南新五丰股份有限公司2025年1-12月主要经营数据公告,https://static.cninfo.com.cn/finalpage/2026-01-10/1224927211.PDF
 600975,新五丰,2026-01,1,45.17,,,,,,,,,,,,,,lead,False,2026-02-11,湖南新五丰股份有限公司2026年1月生猪业务主要经营数据公告,https://static.cninfo.com.cn/finalpage/2026-02-11/1224974692.PDF
 600975,新五丰,2026-02,1,33.95,,,,,,,,,,,,,,lead,False,2026-03-10,湖南新五丰股份有限公司2026年2月生猪业务主要经营数据公告,https://static.cninfo.com.cn/finalpage/2026-03-10/1225001409.PDF
-600975,新五丰,2026-03,1,46.79,33.41,,,,,,10.08,,,,,,,ytd_table,,2026-09-10,湖南新五丰股份有限公司2026年8月生猪业务主要经营数据公告,https://static.cninfo.com.cn/finalpage/2026-09-10/1225555146.PDF
+600975,新五丰,2026-03,1,46.79,33.41,,,,,,10.08,,,,,,,ytd_table,,2026-10-10,湖南新五丰股份有限公司2026年1-9月主要经营数据公告,https://static.cninfo.com.cn/finalpage/2026-10-10/1225598820.PDF
 600975,新五丰,2026-04,1,63.94,,,,,,,,,,,,,,lead,False,2026-05-12,湖南新五丰股份有限公司2026年4月生猪业务主要经营数据公告,https://static.cninfo.com.cn/finalpage/2026-05-12/1225291540.PDF
 600975,新五丰,2026-05,1,48.97,,,,,,,,,,,,,,lead,False,2026-06-11,湖南新五丰股份有限公司2026年5月生猪业务主要经营数据公告,https://static.cninfo.com.cn/finalpage/2026-06-11/1225362096.PDF
-600975,新五丰,2026-06,1,37.2,19.42,,,,,,9.16,,,,,,,ytd_table,,2026-09-10,湖南新五丰股份有限公司2026年8月生猪业务主要经营数据公告,https://static.cninfo.com.cn/finalpage/2026-09-10/1225555146.PDF
+600975,新五丰,2026-06,1,37.2,19.42,,,,,,9.16,,,,,,,ytd_table,,2026-10-10,湖南新五丰股份有限公司2026年1-9月主要经营数据公告,https://static.cninfo.com.cn/finalpage/2026-10-10/1225598820.PDF
 600975,新五丰,2026-07,1,57.88,,,,,,,,,,,,,,lead,False,2026-08-11,湖南新五丰股份有限公司2026年7月生猪业务主要经营数据公告,https://static.cninfo.com.cn/finalpage/2026-08-11/1225466105.PDF
 600975,新五丰,2026-08,1,52.23,,,,,,,,,,,,,,lead,False,2026-09-10,湖南新五丰股份有限公司2026年8月生猪业务主要经营数据公告,https://static.cninfo.com.cn/finalpage/2026-09-10/1225555146.PDF
+600975,新五丰,2026-09,1,49.71,30.18,,,,,,10.43,,,,,,,ytd_table,,2026-10-10,湖南新五丰股份有限公司2026年1-9月主要经营数据公告,https://static.cninfo.com.cn/finalpage/2026-10-10/1225598820.PDF
 603363,傲农生物,2019-01,1,5.6709,,,,,,,,,,,,,,lead,False,2019-02-02,2019年1月养殖业务主要经营数据公告,https://static.cninfo.com.cn/finalpage/2019-02-02/1205821031.PDF
 603363,傲农生物,2019-02,1,4.5518,,,,,,,,,,,,,,lead,False,2019-03-04,2019年2月养殖业务主要经营数据公告,https://static.cninfo.com.cn/finalpage/2019-03-04/1205871550.PDF
 603363,傲农生物,2019-03,1,6.806,,,,,,,,,,,,,,lead,False,2019-04-03,2019年3月养殖业务主要经营数据公告,https://static.cninfo.com.cn/finalpage/2019-04-03/1205987576.PDF
@@ -1429,6 +1442,7 @@ code,sec_name,month_key,months_covered,total_heads,commodity_heads,commodity_hea
 603717,天域生物,2026-06,1,6.24,4.47,,1.77,,,0.517718,,,,,,,,lead,False,2026-07-08,2026年6月养殖业务主要经营数据公告,https://static.cninfo.com.cn/finalpage/2026-07-08/1225412853.PDF
 603717,天域生物,2026-07,1,6.23,3.46,,2.77,,,0.5145649999999999,,,,,,,,lead,False,2026-08-08,2026年7月养殖业务主要经营数据公告,https://static.cninfo.com.cn/finalpage/2026-08-08/1225463029.PDF
 603717,天域生物,2026-08,1,6.38,3.74,,2.64,,,0.520927,,,,,,,,lead,False,2026-09-08,2026年8月养殖业务主要经营数据公告,https://static.cninfo.com.cn/finalpage/2026-09-08/1225550486.PDF
+603717,天域生物,2026-09,1,6.34,2.8,,3.54,,,0.45943500000000004,,,,,,,,lead,False,2026-10-14,2026年9月养殖业务主要经营数据公告,https://static.cninfo.com.cn/finalpage/2026-10-14/1225603393.PDF
 605296,神农集团,2021-07,1,4.71,,,,,,0.88,14.46,,,,,,,table,False,2022-08-12,,https://static.cninfo.com.cn/finalpage/2022-08-12/1214276431.PDF
 605296,神农集团,2021-08,1,6.26,,,,,,1.02,13.33,,,,,,,table,False,2022-09-10,,https://static.cninfo.com.cn/finalpage/2022-09-10/1214576301.PDF
 605296,神农集团,2021-09,1,6.64,,,,,,0.95,11.34,,,,,,,table,False,2022-10-11,,https://static.cninfo.com.cn/finalpage/2022-10-11/1214738340.PDF
@@ -1491,3 +1505,4 @@ code,sec_name,month_key,months_covered,total_heads,commodity_heads,commodity_hea
 605296,神农集团,2026-06,1,28.03,,,,,,3.24,9.06,,,,,,,lead,False,2026-07-08,云南神农农业产业集团股份有限公司2026年6月养殖业务主要经营数据公告,https://static.cninfo.com.cn/finalpage/2026-07-08/1225412750.PDF
 605296,神农集团,2026-07,1,30.09,,,,,,4.11,10.55,,,,,,,lead,False,2026-08-07,云南神农农业产业集团股份有限公司2026年7月养殖业务主要经营数据公告,https://static.cninfo.com.cn/finalpage/2026-08-07/1225461032.PDF
 605296,神农集团,2026-08,1,33.64,,,,,,4.68,10.62,,,,,,,lead,False,2026-09-08,云南神农农业产业集团股份有限公司2026年8月养殖业务主要经营数据公告,https://static.cninfo.com.cn/finalpage/2026-09-08/1225550507.PDF
+605296,神农集团,2026-09,1,24.28,,,,,,3.44,10.46,,,,,,,lead,False,2026-10-13,云南神农农业产业集团股份有限公司2026年9月养殖业务主要经营数据公告,https://static.cninfo.com.cn/finalpage/2026-10-13/1225601321.PDF
