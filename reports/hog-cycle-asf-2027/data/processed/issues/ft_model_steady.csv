@@ -1,0 +1,4 @@
+case,sow_system_kg_per_sow_year,sow_kg_per_hog,piglet_kg_per_hog,finishing_kg_per_hog,total_kg_per_hog,sow_share,piglet_share,finishing_share,herd_fcr_live
+低,1099,56.4,21.6,225.0,303.0,0.186,0.071,0.743,2.53
+中,1233,68.5,34.9,261.2,364.7,0.188,0.096,0.716,2.92
+高,1370,83.0,50.0,300.0,433.0,0.192,0.115,0.693,3.33

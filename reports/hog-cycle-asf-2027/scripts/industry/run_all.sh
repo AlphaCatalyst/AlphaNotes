@@ -14,4 +14,5 @@ python3 -u nxin_prices.py
 python3 -u gd_prices.py
 python3 -u gd_supply_share.py       # 广东省农业农村厅 产销形势分析 (Issue #4)
 python3 -u zhuwang_prices.py        # 中国养猪网 provincial quotes, local only (Issue #4)
+python3 -u cfia_feed.py             # 中国饲料工业协会 月报与分析、猪料图表读数 (Issue #7)
 python3 -u build_checks.py
