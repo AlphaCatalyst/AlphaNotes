@@ -1,4 +1,4 @@
-"""NBS quarterly hog supply data (2016Q1-2026Q2) -> nbs_quarterly.csv (+ nbs_annual_bulletin.csv)
+"""NBS quarterly hog supply data (2016Q1-2026Q3) -> nbs_quarterly.csv (+ nbs_annual_bulletin.csv)
 
 Sources: the quarterly 国民经济运行情况 press releases (Q1 / 上半年 / 前三季度 / 全年) on
 www.stats.gov.cn/sj/zxfb/ and the annual 统计公报 (www.stats.gov.cn/sj/tjgb/ndtjgb/). Values are
@@ -33,7 +33,7 @@ def targets():
     out = []
     for y in range(2016, 2027):
         for q in (1, 2, 3, 4):
-            if (y, q) > (2026, 2):
+            if (y, q) > (2026, 3):
                 break
             lo, hi, plus = WINDOWS[q]
             out.append((f"{y}Q{q}", y, q, f"{y + plus}{lo}", f"{y + plus}{hi}"))

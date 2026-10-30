@@ -90,7 +90,7 @@ def static_list(force: bool = False) -> pd.DataFrame:
                              date=dm.group(1) if dm else None, via="static_list"))
     df = pd.DataFrame(rows).drop_duplicates("url")
     df.to_csv(STATIC, index=False)
-    print(f"static list: {n} pages, {len(df)} items, {df.date.min()} .. {df.date.max()}")
+    print(f"static list: {n} pages, {len(df)} items, {df.date.dropna().min()} .. {df.date.dropna().max()}")
     return df
 
 

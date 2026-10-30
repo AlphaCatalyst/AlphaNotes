@@ -4,14 +4,16 @@ Primary: Sina InnerFuturesNewService.getDailyKLine (o/h/l/c/volume/open interest
 Cross-check: East Money futures kline where available (secid 114.lhYYMM).
 Prices are in yuan/tonne in the source; we keep yuan/tonne and add yuan/kg columns.
 Each row keeps both the trade date and the delivery month so they are never confused.
+An empty or failed response keeps the cached JSON; `--cached` rebuilds the CSV from the cache only.
 """
 import json
 import re
+import sys
 import time
 
 import pandas as pd
 
-from common import PROC, RAW, S, save_json
+from common import PROC, RAW, S, load_json, save_json
 
 contracts = []
 for y in range(21, 28):
@@ -22,18 +24,24 @@ for y in range(21, 28):
         contracts.append(c)
 contracts += ["LH0"]  # Sina main-continuous series, for roll-effect comparison only
 
+cached = "--cached" in sys.argv
 rows, log = [], []
 for c in contracts:
     url = ("https://stock2.finance.sina.com.cn/futures/api/jsonp.php/var%20_x=/"
            f"InnerFuturesNewService.getDailyKLine?symbol={c}")
-    try:
-        t = S.get(url, timeout=30).text
-        m = re.search(r"\((\[.*\])\)", t, flags=re.S)
-        data = json.loads(m.group(1)) if m else []
-    except Exception as e:  # noqa: BLE001
-        data = []
-        log.append(f"{c} sina ERR {e}")
-    save_json(data, RAW / "futures" / f"{c}_sina.json")
+    path = RAW / "futures" / f"{c}_sina.json"
+    data = []
+    if not cached:
+        try:
+            t = S.get(url, timeout=30).text
+            m = re.search(r"\((\[.*\])\)", t, flags=re.S)
+            data = json.loads(m.group(1)) if m else []
+        except Exception as e:  # noqa: BLE001
+            log.append(f"{c} sina ERR {e}")
+    if data:
+        save_json(data, path)
+    elif path.exists():
+        data = load_json(path)
     for x in data:
         rows.append(dict(contract=c, trade_date=x["d"], open=float(x["o"]), high=float(x["h"]),
                          low=float(x["l"]), close=float(x["c"]), volume=float(x["v"]),
@@ -41,7 +49,8 @@ for c in contracts:
                          source="sina"))
     log.append(f"{c}: sina rows={len(data)} first={data[0]['d'] if data else None} last={data[-1]['d'] if data else None}")
     print(log[-1], flush=True)
-    time.sleep(0.4)
+    if not cached:
+        time.sleep(0.4)
 
 df = pd.DataFrame(rows)
 df["delivery_month"] = df["contract"].map(lambda c: None if c == "LH0" else f"20{c[2:4]}-{c[4:6]}")
