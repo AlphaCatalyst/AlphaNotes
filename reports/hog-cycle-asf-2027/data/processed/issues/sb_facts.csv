@@ -1,0 +1,64 @@
+key,value
+base_week,2026-10-16 00:00:00
+base_price,10.088131868131867
+base_lw,34
+base_lunar_year,2026
+base_daily_quotes,2026-10-12
+nxin_daily_shift,-0.032
+target_week,2027-04-09 00:00:00
+jul_lw,20
+now_r_nxin_over_moa_weekly,0.9988
+now_n_overlap_weekly,24
+now_r_moa_weekly_over_monthly,1.0006
+now_n_overlap_monthly,43
+now_nxin_daily_shift,-0.032
+now_last_weekly_nxin,2026-09-25
+now_last_daily_nxin,2026-11-07
+xs_trough_week,2026-06-26 00:00:00
+xs_trough,0.4890947288369398
+last_week,2026-11-06 00:00:00
+xs_last,0.6207548207604867
+xs_vs_trough,0.2691913941428745
+ew_vs_trough,0.11686899367104764
+rs_vs_trough,0.3975703804765469
+csi_vs_trough,-0.20084955342984945
+hog_vs_trough,-0.06626513021861857
+hog_last,8.83313186813187
+xs_max_since,0.6391546918930032
+xs_max_week,2026-09-04 00:00:00
+hog_2026_low_week,2026-11-06 00:00:00
+hog_2026_low,8.83313186813187
+hog_chg_since_10-16,-0.10952386227677541
+seasonal_median_since_10-16,-0.02036659877800439
+hog_chg_since_07-10,-0.22037671066797282
+seasonal_median_since_07-10,0.047935103244837886
+xs_chg_since_10-16,0.05184114218196023
+xs_chg_since_trough,0.2691913941428745
+futures_date,2026-11-06 00:00:00
+LH2611_last,8045.0
+LH2611_1013,10210.0
+LH2701_last,9195.0
+LH2701_1013,10605.0
+LH2703_last,9160.0
+LH2703_1013,10495.0
+LH2705_last,10065.0
+LH2705_1013,11520.0
+LH2709_last,12315.0
+LH2709_1013,13190.0
+carry_slope,-0.7207492894629671
+carry_corr,-0.26431710805326325
+carry_n,176
+carry_big_neg_n,14
+carry_big_neg_years,"2016,2021,2022,2024"
+carry_big_neg_s2_median,-0.1359390044390265
+realized_1016,9.919560439560437
+path_median_1016,10.088131868131867
+realized_1023,9.613846153846154
+path_median_1023,10.009931298835093
+realized_1030,9.198131868131867
+path_median_1030,9.958006609819234
+realized_1106,8.83313186813187
+path_median_1106,9.882670933954026
+now_target_p_q25,6.630169615547468
+now_target_p_median,7.490617870902845
+now_target_p_q75,8.178099004280314
